@@ -32,8 +32,8 @@ import org.jetbrains.plugins.groovy.GroovyLanguage
  */
 class ImpexLanguageInjector : LanguageInjector {
 
-    private val GROOVY_MARKER = "#%groovy%"
-    private val OFFSET = "\"#%groovy%".count()
+    private val groovyMarker = "#%groovy%"
+    private val offset = "\"#%groovy%".count()
 
     override fun getLanguagesToInject(
             host: PsiLanguageInjectionHost,
@@ -41,12 +41,12 @@ class ImpexLanguageInjector : LanguageInjector {
     ) {
         if (host is ImpexStringImpl) {
             val hostString = StringUtil.unquoteString(host.getText()).toLowerCase()
-            if (StringUtil.trim(hostString).startsWith(GROOVY_MARKER)) {
+            if (StringUtil.trim(hostString).startsWith(groovyMarker)) {
                 val language = GroovyLanguage
                 try {
                     injectionPlacesRegistrar.addPlace(
                             language,
-                            TextRange.from(OFFSET, host.getTextLength() - OFFSET), null, null
+                            TextRange.from(offset, host.getTextLength() - offset), null, null
                     )
                 } catch (e: ProcessCanceledException) {
                     // ignore

@@ -23,6 +23,7 @@ public class UnsignedIntegerDocumentFilter extends AbstractDocumentFilter {
     @Override
     public boolean test(final String text) {
         try {
+            //noinspection ResultOfMethodCallIgnored
             Integer.parseUnsignedInt(text);
         } catch (NumberFormatException e) {
             return false;

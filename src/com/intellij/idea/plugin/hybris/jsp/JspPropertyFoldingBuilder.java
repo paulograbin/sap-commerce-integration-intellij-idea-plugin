@@ -39,7 +39,7 @@ import java.util.Optional;
 
 public class JspPropertyFoldingBuilder extends FoldingBuilderEx {
 
-    private static List<Locale.LanguageRange> ourPriorityList = Locale.LanguageRange.parse(
+    private static final List<Locale.LanguageRange> ourPriorityList = Locale.LanguageRange.parse(
         "en-US;q=1.0,en;q=0.5,de;q=0.1"
     );
 
@@ -63,7 +63,7 @@ public class JspPropertyFoldingBuilder extends FoldingBuilderEx {
 
                 @Override
                 public void visitXmlAttribute(@NotNull final XmlAttribute attribute) {
-                    if (!mayResolveToProperty(attribute)) {
+                    if (canNotResolveToProperty(attribute)) {
                         return;
                     }
                     XmlAttributeValue value = attribute.getValueElement();
@@ -88,14 +88,14 @@ public class JspPropertyFoldingBuilder extends FoldingBuilderEx {
                 }
             });
 
-            return results.toArray(new FoldingDescriptor[results.size()]);
+            return results.toArray(new FoldingDescriptor[0]);
         }
 
         return FoldingDescriptor.EMPTY;
     }
 
-    protected boolean mayResolveToProperty(@NotNull final XmlAttribute xmlAttribute) {
-        return "code".equals(xmlAttribute.getName());
+    protected boolean canNotResolveToProperty(@NotNull final XmlAttribute xmlAttribute) {
+        return !"code".equals(xmlAttribute.getName());
     }
 
     @Override
@@ -147,6 +147,7 @@ public class JspPropertyFoldingBuilder extends FoldingBuilderEx {
         return chooseForLocale(ourPriorityList, properties);
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static IProperty chooseForLocale(
         final @NotNull List<Locale.LanguageRange> priorityList,
         final @NotNull List<IProperty> properties

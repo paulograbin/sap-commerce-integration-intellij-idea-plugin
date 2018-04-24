@@ -182,6 +182,7 @@ public class DefaultJavaLibraryDescriptor implements JavaLibraryDescriptor {
             .isEquals();
     }
 
+    @SuppressWarnings("StringBufferReplaceableByString")
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("DefaultJavaLibraryDescriptor{");

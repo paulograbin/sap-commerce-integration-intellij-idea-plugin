@@ -27,6 +27,7 @@ import org.jetbrains.annotations.PropertyKey;
  *
  * @author Alexander Bartash <AlexanderBartash@gmail.com>
  */
+@SuppressWarnings("unused")
 public final class HybrisI18NBundleUtils extends AbstractBundle {
 
     public static final String PATH_TO_BUNDLE = "i18n.HybrisBundle";

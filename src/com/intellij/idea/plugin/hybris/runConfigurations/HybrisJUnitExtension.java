@@ -18,7 +18,6 @@
 
 package com.intellij.idea.plugin.hybris.runConfigurations;
 
-import com.intellij.execution.ExecutionException;
 import com.intellij.execution.RunConfigurationExtension;
 import com.intellij.execution.configurations.JavaParameters;
 import com.intellij.execution.configurations.ParametersList;
@@ -44,7 +43,7 @@ public class HybrisJUnitExtension extends RunConfigurationExtension {
     @Override
     public <T extends RunConfigurationBase> void updateJavaParameters(
         final T configuration, final JavaParameters params, final RunnerSettings runnerSettings
-    ) throws ExecutionException {
+    ) {
         if (runnerSettings != null || !isApplicableFor(configuration)) {
             return;
         }

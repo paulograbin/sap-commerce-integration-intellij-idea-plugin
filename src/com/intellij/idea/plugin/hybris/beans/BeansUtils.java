@@ -24,6 +24,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
+@SuppressWarnings("unused")
 public class BeansUtils {
 
     public static <T extends DomElement, V> GenericAttributeValue<V> expectDomAttributeValue(

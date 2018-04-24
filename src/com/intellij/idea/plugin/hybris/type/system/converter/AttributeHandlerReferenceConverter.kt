@@ -42,6 +42,8 @@ class AttributeHandlerReferenceConverter : CustomReferenceConverter<String> {
         val project = element.project
 
         val reference = object : PsiReferenceBase<PsiElement>(element, true), PsiPolyVariantReference {
+
+            @Suppress("MayBeConstant")
             private val QUOTE_LENGTH = 2
 
             override fun getRangeInElement() = TextRange.from(1, element.textLength - QUOTE_LENGTH)
@@ -79,6 +81,8 @@ class AttributeHandlerReferenceConverter : CustomReferenceConverter<String> {
         val name = value.stringValue!!.trim()
 
         val reference = object : PsiReferenceBase<PsiElement>(element, true), PsiPolyVariantReference {
+
+            @Suppress("MayBeConstant")
             private val QUOTE_LENGTH = 2
 
             override fun getRangeInElement() = TextRange.from(1, element.textLength - QUOTE_LENGTH)

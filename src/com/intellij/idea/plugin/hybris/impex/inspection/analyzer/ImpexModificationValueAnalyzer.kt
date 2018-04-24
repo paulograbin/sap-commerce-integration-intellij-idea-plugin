@@ -65,7 +65,7 @@ class DataTable(private val keyRows: List<Key>, private val attrs: List<String>,
         groupBy.forEach { _, rows: List<Row> ->
             rows.forEach { row1 ->
                 rows.forEach { row2 ->
-                    if (row1.columns != row2.columns && intersection(row1.columns, row2.columns)) {
+                    if (!row1.columns.contentEquals(row2.columns) && intersection(row1.columns, row2.columns)) {
                         row1.columns.forEachIndexed { idx, az ->
                             val row1Element = row1.valueGroup[idx]
                             val row2Element = row2.valueGroup[idx]

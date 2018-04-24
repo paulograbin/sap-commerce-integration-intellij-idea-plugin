@@ -98,7 +98,6 @@ public interface HybrisConstants {
     List<String> TEST_SRC_DIR_NAMES = ContainerUtil.immutableList(TEST_SRC_DIRECTORY, GROOVY_TEST_SRC_DIRECTORY);
     String HMC_MODULE_DIRECTORY = "hmc";
     String HAC_MODULE_DIRECTORY = "hac";
-    String HAC_MODULE_EXTENSION_NAME = "hac";
     String WEB_MODULE_DIRECTORY = "web";
     String BACK_OFFICE_MODULE_DIRECTORY = "backoffice";
     String ADDON_SRC_DIRECTORY = "addonsrc";

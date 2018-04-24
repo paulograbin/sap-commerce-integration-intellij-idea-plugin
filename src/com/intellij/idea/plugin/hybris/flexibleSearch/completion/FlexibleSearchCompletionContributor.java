@@ -20,14 +20,10 @@ package com.intellij.idea.plugin.hybris.flexibleSearch.completion;
 
 import com.intellij.codeInsight.completion.CompletionContributor;
 import com.intellij.codeInsight.completion.CompletionType;
-import com.intellij.codeInsight.lookup.LookupElementBuilder;
-import com.intellij.icons.AllIcons;
 import com.intellij.idea.plugin.hybris.completion.provider.ItemTypeCodeCompletionProvider;
 import com.intellij.idea.plugin.hybris.flexibleSearch.FlexibleSearchLanguage;
 import com.intellij.idea.plugin.hybris.flexibleSearch.completion.provider.FSFieldsCompletionProvider;
 import com.intellij.idea.plugin.hybris.flexibleSearch.completion.provider.FSKeywordCompletionProvider;
-import com.intellij.idea.plugin.hybris.flexibleSearch.completion.provider.FSKeywords;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.TokenSet;
@@ -37,8 +33,6 @@ import static com.intellij.idea.plugin.hybris.flexibleSearch.psi.FlexibleSearchT
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 
 public class FlexibleSearchCompletionContributor extends CompletionContributor {
-
-    private static final Logger LOG = Logger.getInstance(FlexibleSearchCompletionContributor.class);
 
     public FlexibleSearchCompletionContributor() {
         // keywords
@@ -54,10 +48,7 @@ public class FlexibleSearchCompletionContributor extends CompletionContributor {
 //                            .andNot(psiElement().inside(psiElement(COLUMN_REFERENCE)))
 //                            .andNot(psiElement().inside(psiElement(TABLE_NAME_IDENTIFIER)))
                 /*.andNot(psiElement().inside(psiElement(COLUMN_REFERENCE_IDENTIFIER)))*/,
-            new FSKeywordCompletionProvider(FSKeywords.topLevelKeywords(), (keyword) ->
-                LookupElementBuilder.create(keyword)
-                                    .withCaseSensitivity(false)
-                                    .withIcon(AllIcons.Nodes.Function))
+            new FSKeywordCompletionProvider()
         );
 
         extend(

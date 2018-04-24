@@ -31,7 +31,6 @@ import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.ComponentWithBrowseButton;
 import com.intellij.openapi.ui.TextComponentAccessor;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
@@ -44,8 +43,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -59,7 +56,6 @@ import java.util.stream.Collectors;
 
 import static java.lang.Character.getNumericValue;
 import static java.util.Collections.reverse;
-import static java.util.Collections.sort;
 
 /**
  * @author Vlad Bozhenok <VladBozhenok@gmail.com>
@@ -110,13 +106,7 @@ public class HybrisWorkspaceRootStep extends ProjectImportWizardStep implements 
             FileChooserDescriptorFactory.createSingleFolderDescriptor()
         );
 
-        this.storeModuleFilesInCheckBox.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                storeModuleFilesInChooser.setEnabled(((JCheckBox) e.getSource()).isSelected());
-            }
-        });
+        this.storeModuleFilesInCheckBox.addActionListener(e -> storeModuleFilesInChooser.setEnabled(((JCheckBox) e.getSource()).isSelected()));
 
         this.storeModuleFilesInLabel.addMouseListener(new MouseAdapter() {
 
@@ -128,13 +118,7 @@ public class HybrisWorkspaceRootStep extends ProjectImportWizardStep implements 
 
         this.sourceCodeFilesInChooser.setVisible(false);
 
-        this.sourceCodeCheckBox.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                sourceCodeFilesInChooser.setVisible(((JCheckBox) e.getSource()).isSelected());
-            }
-        });
+        this.sourceCodeCheckBox.addActionListener(e -> sourceCodeFilesInChooser.setVisible(((JCheckBox) e.getSource()).isSelected()));
 
         this.sourceCodeLabel.addMouseListener(new MouseAdapter() {
 
@@ -451,13 +435,7 @@ public class HybrisWorkspaceRootStep extends ProjectImportWizardStep implements 
             return null;
         }
         if (sourceZipList.size() > 1) {
-            sort(sourceZipList, new Comparator<File>() {
-
-                @Override
-                public int compare(final File zip1, final File zip2) {
-                    return getPatch(zip1, hybrisApiVersion).compareTo(getPatch(zip2, hybrisApiVersion));
-                }
-            });
+            sourceZipList.sort(Comparator.comparing(zip -> getPatch(zip, hybrisApiVersion)));
             reverse(sourceZipList);
         }
         return sourceZipList.get(0);
@@ -565,7 +543,7 @@ public class HybrisWorkspaceRootStep extends ProjectImportWizardStep implements 
     }
 
     @Override
-    public void nonGuiModeImport(final HybrisProjectSettings settings) throws ConfigurationException {
+    public void nonGuiModeImport(final HybrisProjectSettings settings) {
 
         this.getContext().cleanup();
 
@@ -597,9 +575,7 @@ public class HybrisWorkspaceRootStep extends ProjectImportWizardStep implements 
         }
 
         ProgressManager.getInstance().run(new SearchHybrisDistributionDirectoryTaskModalWindow(
-            new File(this.getBuilder().getFileToImport()), parameter -> {
-            hybrisProjectDescriptor.setHybrisDistributionDirectory(new File(parameter));
-        }
+            new File(this.getBuilder().getFileToImport()), parameter -> hybrisProjectDescriptor.setHybrisDistributionDirectory(new File(parameter))
         ));
 
         hybrisProjectDescriptor.setJavadocUrl(settings.getJavadocUrl());
@@ -625,7 +601,7 @@ public class HybrisWorkspaceRootStep extends ProjectImportWizardStep implements 
                 HybrisI18NBundleUtils.message("hybris.import.label.select.hybris.src.file"),
                 "",
                 HybrisWorkspaceRootStep.this.sourceCodeFilesInChooser,
-                (Project) null,
+                null,
                 fileChooserDescriptor,
                 TextComponentAccessor.TEXT_FIELD_WHOLE_TEXT
             );

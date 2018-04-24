@@ -26,15 +26,16 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
 public class CompositeConverter<DOM> extends ResolvingConverter<DOM> {
 
-    private final TypeSystemConverterBase<? extends DOM>[] myDelegates;
+    private final List<TypeSystemConverterBase<? extends DOM>> myDelegates;
 
-    public CompositeConverter(TypeSystemConverterBase<? extends DOM>... converters) {
+    public CompositeConverter(List<TypeSystemConverterBase<? extends DOM>> converters) {
         myDelegates = converters;
     }
 
@@ -91,19 +92,22 @@ public class CompositeConverter<DOM> extends ResolvingConverter<DOM> {
     public static class TypeOrEnum extends CompositeConverter<DomElement> {
 
         public TypeOrEnum() {
-            super(new EnumTypeConverter(), new ItemTypeConverter());
+            super(Arrays.asList(
+                new EnumTypeConverter(),
+                new ItemTypeConverter()
+            ));
         }
     }
 
     public static class AnyClassifier extends CompositeConverter<DomElement> {
 
         public AnyClassifier() {
-            super(
+            super(Arrays.asList(
                 new EnumTypeConverter(),
                 new ItemTypeConverter(),
                 new CollectionTypeConverter(),
                 new AtomicTypeConverter()
-            );
+            ));
         }
 
     }

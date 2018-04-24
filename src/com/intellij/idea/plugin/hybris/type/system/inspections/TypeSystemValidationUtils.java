@@ -34,6 +34,7 @@ import java.io.File;
 
 import static com.intellij.openapi.util.io.FileUtil.normalize;
 
+@SuppressWarnings("unused")
 public abstract class TypeSystemValidationUtils {
 
     private TypeSystemValidationUtils() {
@@ -74,10 +75,8 @@ public abstract class TypeSystemValidationUtils {
         if (itemsfilePath.contains(normalize(HybrisConstants.HYBRIS_OOTB_MODULE_PREFIX))) {
             return false;
         }
-        if (itemsfilePath.contains(normalize(HybrisConstants.PLATFORM_EXT_MODULE_PREFIX))) {
-            return false;
-        }
-        return true;
+
+        return !itemsfilePath.contains(normalize(HybrisConstants.PLATFORM_EXT_MODULE_PREFIX));
     }
 
     protected static boolean shouldCheckFilesWithoutHybrisSettings(@NotNull final Project project) {

@@ -38,6 +38,8 @@ class HybrisTransitionProcessReferenceProvider : PsiReferenceProvider() {
     override fun getReferencesByElement(element: PsiElement, context: ProcessingContext): Array<PsiReference> {
 
         val reference = object : PsiReferenceBase<PsiElement>(element, true), PsiPolyVariantReference {
+
+            @Suppress("MayBeConstant")
             private val QUOTE_LENGTH = 2
 
             override fun getRangeInElement() = TextRange.from(1, element.textLength - QUOTE_LENGTH)
@@ -51,9 +53,7 @@ class HybrisTransitionProcessReferenceProvider : PsiReferenceProvider() {
                 val tag = PsiTreeUtil.collectElements(rootTag, { el ->
                     el is XmlTag && setOf("action", "end", "wait").contains(el.name)
                 })
-                        .map { el -> el as XmlTag }
-                        .filter { el -> el.getAttribute("id")?.value == name }
-                        .first()
+                        .map { el -> el as XmlTag }.first { el -> el.getAttribute("id")?.value == name }
 
                 return createResults(tag)
             }

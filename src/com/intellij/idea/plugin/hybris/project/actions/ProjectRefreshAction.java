@@ -25,7 +25,6 @@ import com.intellij.ide.util.projectWizard.ModuleWizardStep;
 import com.intellij.ide.util.projectWizard.ProjectBuilder;
 import com.intellij.ide.util.projectWizard.WizardContext;
 import com.intellij.idea.plugin.hybris.common.services.CommonIdeaService;
-import com.intellij.idea.plugin.hybris.common.utils.HybrisI18NBundleUtils;
 import com.intellij.idea.plugin.hybris.common.utils.HybrisIcons;
 import com.intellij.idea.plugin.hybris.gradle.GradleSupport;
 import com.intellij.idea.plugin.hybris.project.AbstractHybrisProjectImportBuilder;
@@ -48,7 +47,6 @@ import com.intellij.openapi.extensions.Extensions;
 import com.intellij.openapi.module.ModifiableModuleModel;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
-import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.CompilerProjectExtension;
@@ -57,7 +55,6 @@ import com.intellij.openapi.roots.impl.libraries.ProjectLibraryTable;
 import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.roots.libraries.LibraryTable;
 import com.intellij.openapi.roots.ui.configuration.ModulesProvider;
-import com.intellij.openapi.ui.Messages;
 import com.intellij.projectImport.ProjectImportProvider;
 import org.jetbrains.annotations.NotNull;
 
@@ -94,22 +91,14 @@ public class ProjectRefreshAction extends AnAction {
         }
         removeOldProjectData(project);
 
-        try {
-            collectStatistics();
-            final AddModuleWizard wizard = getWizard(project);
-            final ProjectBuilder projectBuilder = wizard.getProjectBuilder();
+        collectStatistics();
+        final AddModuleWizard wizard = getWizard(project);
+        final ProjectBuilder projectBuilder = wizard.getProjectBuilder();
 
-            if (projectBuilder instanceof AbstractHybrisProjectImportBuilder) {
-                ((AbstractHybrisProjectImportBuilder) projectBuilder).setRefresh(true);
-            }
-            projectBuilder.commit(project, null, ModulesProvider.EMPTY_MODULES_PROVIDER);
-        } catch (ConfigurationException e) {
-            Messages.showErrorDialog(
-                anActionEvent.getProject(),
-                e.getMessage(),
-                HybrisI18NBundleUtils.message("hybris.project.import.error.unable.to.proceed")
-            );
+        if (projectBuilder instanceof AbstractHybrisProjectImportBuilder) {
+            ((AbstractHybrisProjectImportBuilder) projectBuilder).setRefresh(true);
         }
+        projectBuilder.commit(project, null, ModulesProvider.EMPTY_MODULES_PROVIDER);
     }
 
     private static void removeOldProjectData(@NotNull final Project project) {
@@ -160,7 +149,7 @@ public class ProjectRefreshAction extends AnAction {
         StatsCollector.getInstance().collectStat(StatsCollector.ACTIONS.REFRESH_PROJECT);
     }
 
-    private AddModuleWizard getWizard(final Project project) throws ConfigurationException {
+    private AddModuleWizard getWizard(final Project project) {
         final HybrisProjectImportProvider provider = getHybrisProjectImportProvider();
         final String basePath = project.getBasePath();
         final String projectName = project.getName();

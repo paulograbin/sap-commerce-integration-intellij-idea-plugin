@@ -88,7 +88,8 @@ public class SelectOtherModulesToImportStep extends AbstractSelectModulesToImpor
 
     @Override
     public boolean validate() throws ConfigurationException {
-        return this.validateCommon();
+        this.validateCommon();
+        return true;
     }
 
     @Override

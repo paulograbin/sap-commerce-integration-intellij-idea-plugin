@@ -42,6 +42,7 @@ public class OotbHybrisModuleDescriptor extends RegularHybrisModuleDescriptor {
         super(moduleRootDirectory, rootProjectDescriptor);
     }
 
+    @NotNull
     @Override
     public HybrisModuleDescriptorType getDescriptorType() {
         return HybrisModuleDescriptorType.OOTB;

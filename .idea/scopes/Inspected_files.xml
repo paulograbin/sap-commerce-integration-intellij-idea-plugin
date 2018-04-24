@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Inspected files" pattern="!file[Hybris-Integration]:gen//*&amp;&amp;!file:gradle.properties&amp;&amp;!file:gradlew&amp;&amp;!file:gradlew.bat&amp;&amp;!file:idea-flex.skeleton&amp;&amp;!file[Hybris-Integration]:.idea//*&amp;&amp;!file[Hybris-Integration]:gradle//*" />
+</component>

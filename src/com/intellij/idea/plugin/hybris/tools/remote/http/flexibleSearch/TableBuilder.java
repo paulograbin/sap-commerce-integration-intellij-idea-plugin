@@ -25,7 +25,7 @@ import java.util.List;
 
 public class TableBuilder {
 
-    private List<String[]> rows = new LinkedList<String[]>();
+    private final List<String[]> rows = new LinkedList<>();
 
     public void addRow(String... cols) {
         rows.add(cols);

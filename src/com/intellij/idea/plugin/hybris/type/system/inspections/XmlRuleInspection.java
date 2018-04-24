@@ -79,7 +79,7 @@ public class XmlRuleInspection extends LocalInspectionTool {
             }
         }
 
-        return result.toArray(new ProblemDescriptor[result.size()]);
+        return result.toArray(new ProblemDescriptor[0]);
     }
 
     @NotNull
@@ -138,7 +138,7 @@ public class XmlRuleInspection extends LocalInspectionTool {
                 throw new IOException("Ruleset file is not found");
             }
             final List<XmlRule> rules = new XmlRuleParser().parseRules(new BufferedInputStream(input));
-            return rules.toArray(new XmlRule[rules.size()]);
+            return rules.toArray(new XmlRule[0]);
         }
     }
 

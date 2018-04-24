@@ -23,9 +23,9 @@ package com.intellij.idea.plugin.hybris.impex.tableFormatting;
  */
 public class ImpexTable {
 
-    private int startOffset;
-    private int endOffset;
-    private String content;
+    private final int startOffset;
+    private final int endOffset;
+    private final String content;
 
     public ImpexTable(final int startOffset, final int endOffset, final String content) {
         this.startOffset = startOffset;

@@ -47,9 +47,9 @@ public abstract class AbstractHybrisModuleDescriptor implements HybrisModuleDesc
     @NotNull
     protected final HybrisProjectDescriptor rootProjectDescriptor;
     @NotNull
-    protected final Set<HybrisModuleDescriptor> dependenciesTree = new HashSet<HybrisModuleDescriptor>(0);
+    protected final Set<HybrisModuleDescriptor> dependenciesTree = new HashSet<>(0);
     @NotNull
-    protected Set<String> springFileSet = new HashSet<String>();
+    protected final Set<String> springFileSet = new HashSet<>();
 
     private boolean inLocalExtensions;
     private IMPORT_STATUS importStatus = IMPORT_STATUS.UNUSED;
@@ -240,6 +240,7 @@ public abstract class AbstractHybrisModuleDescriptor implements HybrisModuleDesc
             .isEquals();
     }
 
+    @SuppressWarnings("StringBufferReplaceableByString")
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder(this.getClass().getSimpleName() + " {");

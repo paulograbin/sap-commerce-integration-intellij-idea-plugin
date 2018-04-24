@@ -27,7 +27,6 @@ import com.intellij.idea.plugin.hybris.common.services.CommonIdeaService;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.components.ServiceManager;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
@@ -46,8 +45,6 @@ import javax.xml.bind.UnmarshalException;
  */
 public class BpDiagramElementManagerIml extends AbstractDiagramElementManager<BpGraphNode>
     implements BpDiagramElementManager {
-
-    private static final Logger LOG = Logger.getInstance(BpDiagramElementManagerIml.class);
 
     @Nullable
     @Override

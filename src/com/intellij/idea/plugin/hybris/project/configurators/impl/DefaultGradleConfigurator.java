@@ -26,7 +26,6 @@ import com.intellij.idea.plugin.hybris.project.configurators.GradleConfigurator;
 import com.intellij.idea.plugin.hybris.project.descriptors.GradleModuleDescriptor;
 import com.intellij.idea.plugin.hybris.project.descriptors.HybrisModuleDescriptorType;
 import com.intellij.idea.plugin.hybris.project.descriptors.HybrisProjectDescriptor;
-import com.intellij.openapi.application.AccessToken;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.externalSystem.model.ExternalSystemDataKeys;
@@ -60,31 +59,29 @@ public class DefaultGradleConfigurator implements GradleConfigurator {
         final GradleProjectImportProvider gradleProjectImportProvider = new GradleProjectImportProvider(
             gradleProjectImportBuilder);
 
-        gradleModules.forEach(gradleModule -> {
-            ApplicationManager.getApplication().invokeAndWait(() -> {
-                final AddModuleWizard wizard = new AddModuleWizard(
-                    project,
-                    gradleModule.getGradleFile().getPath(),
-                    gradleProjectImportProvider
-                );
-                final GradleProjectSettings projectSettings = gradleProjectImportBuilder.getControl(project)
-                                                                                        .getProjectSettings();
-                projectSettings.setUseAutoImport(true);
-                projectSettings.setCreateEmptyContentRootDirectories(false);
-                if (wizard.getStepCount() > 0) {
-                    final ModuleWizardStep step = wizard.getCurrentStepObject();
-                    if (step.isStepVisible()) {
-                        step.updateStep();
-                        step.updateDataModel();
-                    }
+        gradleModules.forEach(gradleModule -> ApplicationManager.getApplication().invokeAndWait(() -> {
+            final AddModuleWizard wizard = new AddModuleWizard(
+                project,
+                gradleModule.getGradleFile().getPath(),
+                gradleProjectImportProvider
+            );
+            final GradleProjectSettings projectSettings = gradleProjectImportBuilder.getControl(project)
+                                                                                    .getProjectSettings();
+            projectSettings.setUseAutoImport(true);
+            projectSettings.setCreateEmptyContentRootDirectories(false);
+            if (wizard.getStepCount() > 0) {
+                final ModuleWizardStep step = wizard.getCurrentStepObject();
+                if (step.isStepVisible()) {
+                    step.updateStep();
+                    step.updateDataModel();
                 }
-                wizard.doFinishAction();
-                final List<Module> newModules = ImportModuleAction.createFromWizard(project, wizard);
-                if (gradleRootGroup != null && gradleRootGroup.length > 0) {
-                    moveGradleModulesToGroup(project, newModules, gradleRootGroup);
-                }
-            });
-        });
+            }
+            wizard.doFinishAction();
+            final List<Module> newModules = ImportModuleAction.createFromWizard(project, wizard);
+            if (gradleRootGroup != null && gradleRootGroup.length > 0) {
+                moveGradleModulesToGroup(project, newModules, gradleRootGroup);
+            }
+        }));
 
         project.putUserData(ExternalSystemDataKeys.NEWLY_CREATED_PROJECT, Boolean.TRUE);
     }
@@ -104,14 +101,7 @@ public class DefaultGradleConfigurator implements GradleConfigurator {
             module.setOption(HybrisConstants.DESCRIPTOR_TYPE, HybrisModuleDescriptorType.GRADLE.name());
             modifiableModuleModel.setModuleGroupPath(module, gradleGroup);
         }
-        AccessToken token = null;
-        try {
-            token = ApplicationManager.getApplication().acquireWriteActionLock(getClass());
-            modifiableModuleModel.commit();
-        } finally {
-            if (token != null) {
-                token.finish();
-            }
-        }
+
+        ApplicationManager.getApplication().runWriteAction(modifiableModuleModel::commit);
     }
 }

@@ -24,7 +24,6 @@ import com.intellij.idea.plugin.hybris.project.descriptors.AbstractHybrisModuleD
 import com.intellij.idea.plugin.hybris.project.descriptors.EclipseModuleDescriptor;
 import com.intellij.idea.plugin.hybris.project.descriptors.HybrisModuleDescriptorType;
 import com.intellij.idea.plugin.hybris.project.descriptors.HybrisProjectDescriptor;
-import com.intellij.openapi.application.AccessToken;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.ModifiableModuleModel;
 import com.intellij.openapi.module.Module;
@@ -82,14 +81,7 @@ public class DefaultEclipseConfigurator implements EclipseConfigurator {
             module.setOption(HybrisConstants.DESCRIPTOR_TYPE, HybrisModuleDescriptorType.ECLIPSE.name());
             modifiableModuleModel.setModuleGroupPath(module, eclipseGroup);
         }
-        AccessToken token = null;
-        try {
-            token = ApplicationManager.getApplication().acquireWriteActionLock(getClass());
-            modifiableModuleModel.commit();
-        } finally {
-            if (token != null) {
-                token.finish();
-            }
-        }
+
+        ApplicationManager.getApplication().runWriteAction(modifiableModuleModel::commit);
     }
 }

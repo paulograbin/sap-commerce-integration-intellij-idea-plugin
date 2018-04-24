@@ -307,6 +307,7 @@ public class HybrisProjectSettings {
             .isEquals();
     }
 
+    @SuppressWarnings("StringBufferReplaceableByString")
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("HybrisProjectSettings{");

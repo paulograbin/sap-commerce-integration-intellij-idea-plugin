@@ -46,9 +46,6 @@ import static com.intellij.idea.plugin.hybris.impex.utils.ImpexPsiUtils.nextElem
 import static com.intellij.idea.plugin.hybris.impex.utils.ImpexPsiUtils.nextElementIsUserRightsMacros;
 import static com.intellij.util.containers.ContainerUtil.newArrayList;
 
-/**
- * @author
- */
 public class ImpexFoldingLinesBuilder extends FoldingBuilderEx {
 
     private static final String LINE_GROUP_NAME = "impex_fold_line";
@@ -103,7 +100,7 @@ public class ImpexFoldingLinesBuilder extends FoldingBuilderEx {
                             currentLineGroup,
                             (elm) -> {
                                 final PsiElement prevSibling = getPrevNonWhitespaceElement(elm);
-                                if (prevSibling != null && (isHeaderLine(prevSibling) || isUserRightsMacros(prevSibling))) {
+                                if (isHeaderLine(prevSibling) || isUserRightsMacros(prevSibling)) {
                                     return ";....;....";
                                 }
                                 return "";
@@ -118,7 +115,7 @@ public class ImpexFoldingLinesBuilder extends FoldingBuilderEx {
             }
         }
 
-        return descriptors.toArray(new FoldingDescriptor[descriptors.size()]);
+        return descriptors.toArray(new FoldingDescriptor[0]);
     }
 
 
@@ -151,9 +148,6 @@ public class ImpexFoldingLinesBuilder extends FoldingBuilderEx {
 
     @Override
     public boolean isCollapsedByDefault(@NotNull final ASTNode node) {
-        if (Objects.equals(node.getElementType(), ImpexTypes.VALUE_LINE)) {
-            return false;
-        }
-        return true;
+        return !Objects.equals(node.getElementType(), ImpexTypes.VALUE_LINE);
     }
 }

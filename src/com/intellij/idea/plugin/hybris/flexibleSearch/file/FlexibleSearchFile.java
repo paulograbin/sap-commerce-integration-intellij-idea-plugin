@@ -24,8 +24,6 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
-
 public class FlexibleSearchFile extends PsiFileBase {
 
     public FlexibleSearchFile(@NotNull final FileViewProvider viewProvider) {
@@ -42,11 +40,6 @@ public class FlexibleSearchFile extends PsiFileBase {
     @Override
     public String toString() {
         return "FlexibleSearch File";
-    }
-
-    @Override
-    public Icon getIcon(final int flags) {
-        return super.getIcon(flags);
     }
 
 }

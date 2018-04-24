@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class HybrisProjectApplicationComponent implements ApplicationComponent {
 
-    private HybrisProjectManagerListener projectManagerListener = new HybrisProjectManagerListener();
+    private final HybrisProjectManagerListener projectManagerListener = new HybrisProjectManagerListener();
     private Disposable disposable;
 
     @Override

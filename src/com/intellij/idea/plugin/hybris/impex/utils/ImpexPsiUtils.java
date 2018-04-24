@@ -52,6 +52,7 @@ import static com.intellij.util.containers.ContainerUtil.newArrayList;
  *
  * @author Alexander Bartash <AlexanderBartash@gmail.com>
  */
+@SuppressWarnings("unused")
 public final class ImpexPsiUtils {
 
     private ImpexPsiUtils() throws IllegalAccessException {
@@ -143,8 +144,9 @@ public final class ImpexPsiUtils {
             return null;
         } else {
             for (PsiElement child = sibling.getNextSibling(); child != null; child = child.getNextSibling()) {
-                for (final Class<T> aClass : aClasses) {
+                for (final Class aClass : aClasses) {
                     if (aClass.isInstance(child)) {
+                        //noinspection unchecked
                         return (T) child;
                     }
                 }
@@ -237,7 +239,6 @@ public final class ImpexPsiUtils {
         return nextElementIsValueLine && prevElementIsValueLine;
     }
 
-    @Nullable
     @Contract(pure = true)
     public static boolean nextElementIsHeaderLine(@NotNull final PsiElement element) {
         Validate.notNull(element);
@@ -260,7 +261,6 @@ public final class ImpexPsiUtils {
         return true;
     }
 
-    @Nullable
     @Contract(pure = true)
     public static boolean nextElementIsUserRightsMacros(@NotNull final PsiElement element) {
         Validate.notNull(element);
@@ -283,7 +283,6 @@ public final class ImpexPsiUtils {
         return true;
     }
 
-    @Nullable
     @Contract(pure = true)
     public static boolean prevElementIsUserRightsMacros(@NotNull final PsiElement element) {
         Validate.notNull(element);
@@ -311,7 +310,7 @@ public final class ImpexPsiUtils {
 
         PsiElement prevSibling = element.getPrevSibling();
 
-        while (null != prevSibling && (isWhiteSpace(prevSibling) || isLineBreak(prevSibling))) {
+        while (isWhiteSpace(prevSibling) || isLineBreak(prevSibling)) {
             prevSibling = prevSibling.getPrevSibling();
         }
 
@@ -325,7 +324,7 @@ public final class ImpexPsiUtils {
 
         PsiElement nextSibling = element.getNextSibling();
 
-        while (null != nextSibling && (isWhiteSpace(nextSibling) || isLineBreak(nextSibling))) {
+        while (isWhiteSpace(nextSibling) || isLineBreak(nextSibling)) {
             nextSibling = nextSibling.getNextSibling();
         }
 
@@ -384,42 +383,7 @@ public final class ImpexPsiUtils {
         );
         if (null != headerParameter) {
 
-            final PsiElement[] children = headerParameter.getParent().getChildren();
-            int i = -2;
-            for (final PsiElement child : children) {
-                if (!child.equals(headerParameter)) {
-                    i++;
-                } else {
-                    break;
-                }
-            }
-
-            final List<PsiElement> result = newArrayList();
-            PsiElement psiElement = getNextSiblingOfAnyType(
-                PsiTreeUtil.getParentOfType(headerParameter, ImpexHeaderLine.class),
-                ImpexValueLine.class,
-                ImpexHeaderLine.class,
-                ImpexRootMacroUsage.class
-            );
-
-            while (psiElement != null && !isHeaderLine(psiElement) && !isUserRightsMacros(psiElement)) {
-                if (isImpexValueLine(psiElement)) {
-                    final PsiElement[] elements = psiElement.getChildren();
-                    if (elements.length > i) {
-                        result.add(elements[i]);
-                    }
-                }
-
-
-                psiElement = getNextSiblingOfAnyType(
-                    psiElement,
-                    ImpexValueLine.class,
-                    ImpexHeaderLine.class,
-                    ImpexRootMacroUsage.class
-                );
-            }
-
-            return result;
+            return getColumnForHeader(headerParameter);
         }
 
         return null;

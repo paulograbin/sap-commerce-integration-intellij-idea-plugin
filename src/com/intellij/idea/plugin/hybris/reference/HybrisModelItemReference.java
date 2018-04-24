@@ -59,14 +59,13 @@ public class HybrisModelItemReference extends PsiReferenceBase<PsiElement> imple
         final String modelName = PATTERN.matcher(myElement.getText()).replaceAll("");
 
         final String javaModelName = modelName + JAVA_MODEL_SUFFIX;
-        final String jaloModelName = modelName;
 
         final PsiClass[] javaModelClasses = PsiShortNamesCache.getInstance(project).getClassesByName(
             javaModelName, GlobalSearchScope.allScope(project)
         );
 
         final PsiClass[] jaloModelClasses = PsiShortNamesCache.getInstance(project).getClassesByName(
-            jaloModelName, GlobalSearchScope.projectScope(project)
+            modelName, GlobalSearchScope.projectScope(project)
         );
 
         final PsiClass[] psiClasses = ArrayUtil.mergeArrays(javaModelClasses, jaloModelClasses);

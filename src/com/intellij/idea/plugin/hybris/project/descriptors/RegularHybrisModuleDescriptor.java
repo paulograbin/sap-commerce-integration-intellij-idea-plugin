@@ -158,7 +158,7 @@ public abstract class RegularHybrisModuleDescriptor extends AbstractHybrisModule
             return getDefaultRequiredExtensionNames();
         }
 
-        final Set<String> requiredExtensionNames = new HashSet<String>(requiresExtensions.size());
+        final Set<String> requiredExtensionNames = new HashSet<>(requiresExtensions.size());
 
         requiredExtensionNames.addAll(requiresExtensions.stream()
                                                         .map(RequiresExtensionType::getName)
@@ -289,20 +289,18 @@ public abstract class RegularHybrisModuleDescriptor extends AbstractHybrisModule
         ));
 
         if (this.hasHmcModule()) {
-            final HybrisModuleDescriptor hmcModule = getRootProjectDescriptor()
+            getRootProjectDescriptor()
                 .getModulesChosenForImport().stream()
                 .filter(e -> e.getName().equals(HybrisConstants.HMC_EXTENSION_NAME))
                 .findFirst()
-                .orElse(null);
-            if (hmcModule != null) {
-                libs.add(new DefaultJavaLibraryDescriptor(
+                .ifPresent(hmcModule -> libs.add(new DefaultJavaLibraryDescriptor(
                     new File(
                         hmcModule.getRootDirectory(),
                         HybrisConstants.WEB_INF_CLASSES_DIRECTORY
                     ),
-                    false, true
-                ));
-            }
+                    false,
+                    true
+                )));
         }
 
         if (this.hasBackofficeModule()) {

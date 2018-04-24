@@ -249,7 +249,6 @@ public class HybrisProjectManagerListener implements ProjectManagerListener, Dis
             IOUtils.write(content, new FileOutputStream(compilingXml), StandardCharsets.UTF_8);
         } catch (IOException e) {
             LOG.error(e);
-            return;
         }
     }
 

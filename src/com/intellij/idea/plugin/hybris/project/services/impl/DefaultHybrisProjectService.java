@@ -24,7 +24,6 @@ import com.intellij.idea.plugin.hybris.common.services.VirtualFileSystemService;
 import com.intellij.idea.plugin.hybris.project.descriptors.HybrisProjectDescriptor;
 import com.intellij.idea.plugin.hybris.project.services.HybrisProjectService;
 import com.intellij.openapi.components.ServiceManager;
-import com.intellij.openapi.diagnostic.Logger;
 import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.idea.maven.model.MavenConstants;
@@ -37,8 +36,6 @@ import java.io.File;
  * @author Alexander Bartash <AlexanderBartash@gmail.com>
  */
 public class DefaultHybrisProjectService implements HybrisProjectService {
-
-    private static final Logger LOG = Logger.getInstance(DefaultHybrisProjectService.class);
 
     @Override
     public boolean isConfigModule(@NotNull final File file) {
@@ -80,8 +77,12 @@ public class DefaultHybrisProjectService implements HybrisProjectService {
     }
 
     @Override
-    public boolean isOutOfTheBoxModule(@NotNull final File file, final HybrisProjectDescriptor rootProjectDescriptor) {
+    public boolean isOutOfTheBoxModule(
+        @NotNull final File file,
+        @NotNull final HybrisProjectDescriptor rootProjectDescriptor
+    ) {
         Validate.notNull(file);
+
         final File extDir = rootProjectDescriptor.getExternalExtensionsDirectory();
         if (extDir != null) {
             final VirtualFileSystemService virtualFSService = ServiceManager.getService(

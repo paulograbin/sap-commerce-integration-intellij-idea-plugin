@@ -18,7 +18,6 @@
 
 package com.intellij.idea.plugin.hybris.impex.constants.modifier;
 
-import com.google.common.collect.Lists;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.NotNull;
@@ -29,6 +28,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.intellij.idea.plugin.hybris.impex.constants.ImpexConstants.ModifierCommonValues.BOOLEAN;
 import static com.intellij.idea.plugin.hybris.impex.constants.ImpexConstants.ModifierCommonValues.NONE;
@@ -60,7 +60,7 @@ public enum AttributeModifier implements ImpexModifier {
     private final String modifierName;
     private final List<String> modifierValues;
 
-    private static final Map<String, ImpexModifier> ELEMENTS_MAP = new HashMap<String, ImpexModifier>(
+    private static final Map<String, ImpexModifier> ELEMENTS_MAP = new HashMap<>(
         AttributeModifier.values().length
     );
 
@@ -89,9 +89,9 @@ public enum AttributeModifier implements ImpexModifier {
         if (ArrayUtils.isEmpty(modifierValues)) {
             this.modifierValues = Collections.emptyList();
         } else {
-            this.modifierValues = Lists.transform(
-                Arrays.asList(modifierValues), ImpexModifierValueToStringConversionFunction.getInstance()
-            );
+            this.modifierValues = Arrays.stream(modifierValues)
+                                        .map(ImpexModifierValue::getModifierValue)
+                                        .collect(Collectors.toList());
         }
     }
 

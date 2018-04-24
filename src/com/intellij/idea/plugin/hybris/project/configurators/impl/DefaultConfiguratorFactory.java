@@ -59,7 +59,7 @@ public class DefaultConfiguratorFactory implements ConfiguratorFactory {
         final FacetConfigurator springFacetConfigurator = ServiceManager.getService(SpringFacetConfigurator.class);
         final FacetConfigurator webFacetConfigurator = ServiceManager.getService(WebFacetConfigurator.class);
 
-        final List<FacetConfigurator> facetConfigurators = new ArrayList<FacetConfigurator>(2);
+        final List<FacetConfigurator> facetConfigurators = new ArrayList<>(2);
 
         if (null != springFacetConfigurator) {
             facetConfigurators.add(springFacetConfigurator);

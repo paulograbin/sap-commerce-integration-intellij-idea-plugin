@@ -64,6 +64,7 @@ class TypeSystemAttributeReference extends TypeSystemReferenceBase<ImpexAnyHeade
             return ResolveResult.EMPTY_ARRAY;
         }
 
+        //noinspection FuseStreamOperations
         final List<ResolveResult> result = metaClass.get()
                                                     .findPropertiesByName(featureName, true)
                                                     .stream()
@@ -79,7 +80,7 @@ class TypeSystemAttributeReference extends TypeSystemReferenceBase<ImpexAnyHeade
                  .map(RelationElementResolveResult::new)
                  .collect(Collectors.toCollection(() -> result));
 
-        return result.toArray(new ResolveResult[result.size()]);
+        return result.toArray(new ResolveResult[0]);
     }
 
     private Optional<ImpexHeaderTypeName> findItemTypeReference() {

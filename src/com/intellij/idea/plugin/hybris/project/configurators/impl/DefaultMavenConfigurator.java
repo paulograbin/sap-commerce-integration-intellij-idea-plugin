@@ -87,21 +87,18 @@ public class DefaultMavenConfigurator implements MavenConfigurator {
 
         project.getMessageBus().connect().subscribe(
             MavenImportListener.TOPIC,
-            (importedProjects, newModules) -> {
-
-                ApplicationManager.getApplication().invokeLater(() -> {
-                    if (!project.isDisposed()) {
-                        moveMavenModulesToCorrectGroup(
-                            project,
-                            mavenModules,
-                            configuratorFactory,
-                            pomList,
-                            importedProjects,
-                            newModules
-                        );
-                    }
-                });
-            }
+            (importedProjects, newModules) -> ApplicationManager.getApplication().invokeLater(() -> {
+                if (!project.isDisposed()) {
+                    moveMavenModulesToCorrectGroup(
+                        project,
+                        mavenModules,
+                        configuratorFactory,
+                        pomList,
+                        importedProjects,
+                        newModules
+                    );
+                }
+            })
         );
         mavenProjectBuilder.commit(project);
         MavenProjectsManager.getInstance(project).importProjects();

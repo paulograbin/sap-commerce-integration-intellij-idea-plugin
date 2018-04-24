@@ -42,12 +42,8 @@ open class ImpexPsiNamedElementImpl(node: ASTNode) : ASTWrapperPsiElement(node),
 
     fun getKey(): String? {
         val keyNode = this.node.findChildByType(ImpexTypes.VALUE)
-        if (keyNode != null) {
-            // IMPORTANT: Convert embedded escaped spaces to simple spaces
-            return keyNode.text.replace("\\\\ ", " ")
-        } else {
-            return null
-        }
+
+        return keyNode?.text?.replace("\\\\ ", " ")
     }
 
     override fun toString(): String = text ?: super.toString()

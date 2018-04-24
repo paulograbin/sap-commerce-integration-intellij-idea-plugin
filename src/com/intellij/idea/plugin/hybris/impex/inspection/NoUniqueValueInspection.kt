@@ -33,7 +33,7 @@ class NoUniqueValueVisitor(private val problemsHolder: ProblemsHolder) : PsiElem
                 val keyAttrsGroupedByName = fullParametersList.filter { keyAttrPredicate(it) }.groupBy { it.anyHeaderParameterName.text }
 
                 val dataMap = mutableMapOf<String, List<PsiElement>>()
-                keyAttrsGroupedByName.forEach { name, attrs -> dataMap.put(name, attrs.flatMap { ImpexPsiUtils.getColumnForHeader(it).map { it.lastChild } }) }
+                keyAttrsGroupedByName.forEach { name, attrs -> dataMap[name] = attrs.flatMap { ImpexPsiUtils.getColumnForHeader(it).map { it.lastChild } } }
 
                 if (distinctCommonAttrsNames.isEmpty()) {
                     val attrsNames = fullParametersList.filter { keyAttrPredicate(it) }.map { it.text }.distinct()

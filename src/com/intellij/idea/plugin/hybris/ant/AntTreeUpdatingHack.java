@@ -110,7 +110,7 @@ public class AntTreeUpdatingHack extends AbstractProjectComponent {
 
             private void stateChanged() {
                 final Component focusOwner = IdeFocusManager.getInstance(myProject).getFocusOwner();
-                final boolean newFocused = focusOwner != null && UIUtil.isAncestor(antExplorer, focusOwner);
+                final boolean newFocused = UIUtil.isAncestor(antExplorer, focusOwner);
 
                 if (focused != newFocused) {
                     focused = newFocused;

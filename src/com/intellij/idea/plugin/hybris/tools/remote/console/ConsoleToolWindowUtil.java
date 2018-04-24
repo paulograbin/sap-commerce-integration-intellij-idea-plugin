@@ -32,7 +32,7 @@ import java.awt.*;
 
 public class ConsoleToolWindowUtil {
 
-    private static ConsoleToolWindowUtil instance = new ConsoleToolWindowUtil();
+    private static final ConsoleToolWindowUtil instance = new ConsoleToolWindowUtil();
 
     private ToolWindow toolWindow;
 

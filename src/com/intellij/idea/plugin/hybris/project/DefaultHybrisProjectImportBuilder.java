@@ -43,7 +43,6 @@ import com.intellij.openapi.extensions.ExtensionPoint;
 import com.intellij.openapi.extensions.Extensions;
 import com.intellij.openapi.module.ModifiableModuleModel;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ui.configuration.ModulesProvider;
@@ -154,6 +153,7 @@ public class DefaultHybrisProjectImportBuilder extends AbstractHybrisProjectImpo
         try {
             if (null == this.hybrisProjectDescriptor) {
                 this.hybrisProjectDescriptor = new DefaultHybrisProjectDescriptor();
+                //noinspection ConstantConditions
                 this.hybrisProjectDescriptor.setProject(getCurrentProject());
             }
 
@@ -346,10 +346,9 @@ public class DefaultHybrisProjectImportBuilder extends AbstractHybrisProjectImpo
     }
 
     private List<File> getAllImlFiles(final File dir) {
-        final List<File> imlFiles = Arrays.stream(dir.listFiles(
+        return Arrays.stream(dir.listFiles(
             e -> e.getName().endsWith(HybrisConstants.NEW_IDEA_MODULE_FILE_EXTENSION)
         )).collect(Collectors.toList());
-        return imlFiles;
     }
 
     private List<File> getModulesChosenForImportFiles(final Iterable<HybrisModuleDescriptor> modulesChosenForImport) {
@@ -362,6 +361,7 @@ public class DefaultHybrisProjectImportBuilder extends AbstractHybrisProjectImpo
         return alreadyExistingModuleFiles;
     }
 
+    @NotNull
     @Override
     public String getName() {
         return message("hybris.project.name");
@@ -398,12 +398,7 @@ public class DefaultHybrisProjectImportBuilder extends AbstractHybrisProjectImpo
     @Override
     public void setHybrisModulesToImport(final List<HybrisModuleDescriptor> hybrisModules) {
         hybrisModulesToImport = hybrisModules;
-        try {
-            setList(hybrisModules);
-        } catch (ConfigurationException e) {
-            LOG.error(e);
-            // no-op already validated
-        }
+        setList(hybrisModules);
     }
 
     @Override
@@ -420,9 +415,9 @@ public class DefaultHybrisProjectImportBuilder extends AbstractHybrisProjectImpo
     }
 
     @Override
-    public void setList(final List<HybrisModuleDescriptor> list) throws ConfigurationException {
+    public void setList(final List<HybrisModuleDescriptor> list) {
 
-        final List<HybrisModuleDescriptor> chosenForImport = new ArrayList<HybrisModuleDescriptor>(list);
+        final List<HybrisModuleDescriptor> chosenForImport = new ArrayList<>(list);
 
         chosenForImport.removeAll(this.getHybrisProjectDescriptor().getAlreadyOpenedModules());
 

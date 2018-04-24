@@ -57,9 +57,20 @@ public class ImpexBlock extends AbstractBlock {
         this.spacingBuilder = spacingBuilder;
     }
 
+    protected ImpexBlock(
+        @NotNull final ASTNode node,
+        @Nullable final Alignment alignment,
+        @NotNull final SpacingBuilder spacingBuilder
+    ) {
+
+        super(node, null, alignment);
+
+        this.spacingBuilder = spacingBuilder;
+    }
+
     @Override
     protected List<Block> buildChildren() {
-        final List<Block> blocks = new ArrayList<Block>();
+        final List<Block> blocks = new ArrayList<>();
 
         final AlignmentStrategy alignmentStrategy = getAlignmentStrategy();
         alignmentStrategy.processNode(myNode);
@@ -80,7 +91,6 @@ public class ImpexBlock extends AbstractBlock {
 
                 final Block block = new ImpexBlock(
                     currentNode,
-                    null,
                     alignmentStrategy.getAlignment(currentNode),
                     spacingBuilder
                 );

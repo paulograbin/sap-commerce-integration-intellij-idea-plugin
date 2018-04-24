@@ -22,7 +22,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.text.PlainDocument;
 
 public class HybrisToolWindow implements ToolWindowFactory, DumbAware {
-    private ToolWindow myToolWindow;
+
     private Project myProject;
     private JPanel myToolWindowContent;
     private JTextField projectIpTextField;
@@ -41,7 +41,6 @@ public class HybrisToolWindow implements ToolWindowFactory, DumbAware {
     public void createToolWindowContent(
         @NotNull final Project project, @NotNull final ToolWindow toolWindow
     ) {
-        myToolWindow = toolWindow;
         myProject = project;
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
         Content content = contentFactory.createContent(myToolWindowContent, "", false);

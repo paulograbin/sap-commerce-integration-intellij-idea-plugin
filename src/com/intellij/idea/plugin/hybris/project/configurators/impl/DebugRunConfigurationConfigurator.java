@@ -138,9 +138,6 @@ public class DebugRunConfigurationConfigurator implements RunConfigurationConfig
         final Optional<String> address = Arrays.stream(transport.get().split(","))
                                                .filter(e -> e.startsWith(HybrisConstants.ADDRESS))
                                                .findAny();
-        if (!address.isPresent()) {
-            return null;
-        }
-        return address.get().split("=")[1];
+        return address.map(s -> s.split("=")[1]).orElse(null);
     }
 }

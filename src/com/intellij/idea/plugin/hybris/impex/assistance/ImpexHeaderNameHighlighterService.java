@@ -29,9 +29,9 @@ import org.jetbrains.annotations.NotNull;
  */
 public interface ImpexHeaderNameHighlighterService {
 
-    @Contract(pure = false)
+    @Contract()
     void highlightCurrentHeader(@NotNull Editor editor);
 
-    @Contract(pure = false)
+    @Contract()
     void releaseEditorData(@NotNull Editor editor);
 }

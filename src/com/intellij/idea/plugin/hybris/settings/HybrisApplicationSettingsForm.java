@@ -144,10 +144,7 @@ public class HybrisApplicationSettingsForm {
         if (scanThroughExternalModule.isSelected() != data.isScanThroughExternalModule()) {
             return true;
         }
-        if (followSymlink.isSelected() != data.isFollowSymlink()) {
-            return true;
-        }
-        return false;
+        return followSymlink.isSelected() != data.isFollowSymlink();
     }
 
     public JPanel getMainPanel() {
@@ -164,9 +161,11 @@ public class HybrisApplicationSettingsForm {
         projectImportLabel = new JBLabel();
         projectImportLabel.setBorder(IdeBorderFactory.createTitledBorder(HybrisI18NBundleUtils.message(
             "hybris.import.settings.project.title")));
-        junkListPanel = new MyListPanel("hybris.import.settings.junk.directory.name", "hybris.import.settings.junk.directory.popup.add.title", "hybris.import.settings.junk.directory.popup.add.text", "hybris.import.settings.junk.directory.popup.edit.title", "hybris.import.settings.junk.directory.popup.edit.text", new ArrayList<String>());
+        junkListPanel = new MyListPanel("hybris.import.settings.junk.directory.name", "hybris.import.settings.junk.directory.popup.add.title", "hybris.import.settings.junk.directory.popup.add.text", "hybris.import.settings.junk.directory.popup.edit.title", "hybris.import.settings.junk.directory.popup.edit.text",
+                                        new ArrayList<>());
         junkDirectoriesPanel = junkListPanel;
-        tsdListPanel = new MyListPanel("hybris.import.settings.tsv.diagram.name", "hybris.import.settings.tsv.diagram.popup.add.title", "hybris.import.settings.tsv.diagram.popup.add.text", "hybris.import.settings.tsv.diagram.popup.edit.title", "hybris.import.settings.tsv.diagram.popup.edit.text", new ArrayList<String>());
+        tsdListPanel = new MyListPanel("hybris.import.settings.tsv.diagram.name", "hybris.import.settings.tsv.diagram.popup.add.title", "hybris.import.settings.tsv.diagram.popup.add.text", "hybris.import.settings.tsv.diagram.popup.edit.title", "hybris.import.settings.tsv.diagram.popup.edit.text",
+                                       new ArrayList<>());
         typeSystemDiagramStopWords = tsdListPanel;
 
         projectTreeViewSettingsLabel = new JBLabel();

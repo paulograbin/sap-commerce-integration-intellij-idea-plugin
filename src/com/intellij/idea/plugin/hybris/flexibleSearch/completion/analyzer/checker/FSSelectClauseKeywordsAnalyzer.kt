@@ -33,7 +33,6 @@ import com.intellij.psi.util.PsiTreeUtil
  * @author Nosov Aleksandr <nosovae.dev@gmail.com>
  */
 object FSSelectClauseKeywordsAnalyzer {
-    private val errorIdendifier = "IntellijIdeaRulezzz"
 
     fun analyzeCompletions(parameters: CompletionParameters, completionResultSet: CompletionResultSet) {
         val context = parameters.originalPosition ?: parameters.position

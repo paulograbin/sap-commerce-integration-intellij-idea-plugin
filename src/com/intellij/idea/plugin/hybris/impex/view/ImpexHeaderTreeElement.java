@@ -45,7 +45,7 @@ public class ImpexHeaderTreeElement extends PsiTreeElementBase<ImpexHeaderLine> 
     public Collection<StructureViewTreeElement> getChildrenBase() {
         return getElement().getFullHeaderParameterList()
                            .stream()
-                           .map(e -> new ImpexHeaderParameterElement(e))
+                           .map(ImpexHeaderParameterElement::new)
                            .collect(Collectors.toList());
     }
 

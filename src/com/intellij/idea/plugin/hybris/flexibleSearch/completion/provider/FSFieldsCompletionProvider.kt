@@ -30,7 +30,6 @@ import com.intellij.idea.plugin.hybris.type.system.meta.TSMetaProperty
 import com.intellij.idea.plugin.hybris.type.system.meta.TSMetaReference
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.text.StringUtil
-import com.intellij.psi.impl.source.tree.LeafPsiElement
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.psi.util.PsiTreeUtil.findSiblingBackward
 import com.intellij.util.JavaeeIcons.PARAMETER_ICON

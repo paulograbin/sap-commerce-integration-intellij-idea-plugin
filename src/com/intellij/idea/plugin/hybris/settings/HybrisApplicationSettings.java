@@ -238,8 +238,8 @@ public class HybrisApplicationSettings {
         this.followSymlink = followSymlink;
     }
 
-    public boolean isAllowedSendingPlainStatistics() {
-        return allowedSendingPlainStatistics;
+    public boolean isNotAllowedSendingPlainStatistics() {
+        return !allowedSendingPlainStatistics;
     }
 
     public void setAllowedSendingPlainStatistics(final boolean allowedSendingPlainStatistics) {
@@ -368,6 +368,7 @@ public class HybrisApplicationSettings {
             .isEquals();
     }
 
+    @SuppressWarnings("StringBufferReplaceableByString")
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("HybrisApplicationSettings{");

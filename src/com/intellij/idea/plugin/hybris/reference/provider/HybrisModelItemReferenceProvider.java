@@ -48,6 +48,6 @@ public class HybrisModelItemReferenceProvider extends PsiReferenceProvider {
             = new HybrisModelItemReference(element, true);
         final List<PsiReference> results = new ArrayList<>();
         results.add(reference);
-        return results.toArray(new PsiReference[results.size()]);
+        return results.toArray(new PsiReference[0]);
     }
 }

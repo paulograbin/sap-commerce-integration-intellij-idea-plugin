@@ -34,7 +34,7 @@ public enum BooleanModifierValue implements ImpexModifierValue {
 
     private final String modifierValue;
 
-    private static final Map<String, BooleanModifierValue> ELEMENTS_MAP = new HashMap<String, BooleanModifierValue>(
+    private static final Map<String, BooleanModifierValue> ELEMENTS_MAP = new HashMap<>(
         BooleanModifierValue.values().length
     );
 
@@ -42,12 +42,6 @@ public enum BooleanModifierValue implements ImpexModifierValue {
         for (BooleanModifierValue impexModifierValue : BooleanModifierValue.values()) {
             ELEMENTS_MAP.put(impexModifierValue.getModifierValue(), impexModifierValue);
         }
-    }
-
-    public static BooleanModifierValue getByModifierValue(@NotNull final String modifierValue) {
-        Validate.notEmpty(modifierValue);
-
-        return ELEMENTS_MAP.get(modifierValue);
     }
 
     BooleanModifierValue(@NotNull final String modifierValue) {

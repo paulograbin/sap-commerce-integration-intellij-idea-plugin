@@ -75,6 +75,8 @@ import static com.intellij.openapi.util.text.StringUtil.startsWithIgnoreCase;
  *     This class is just a temporary solution to disable FS error highlighting completely.
  *     It'll get reverted when we implement FS properly.
  */
+//noinspection All
+@SuppressWarnings("All") // It is copy paste from com.intellij.lang.parser.GeneratedParserUtilBase
 public class FlexibleSearchParserUtils {
     private static final Logger LOG = Logger.getInstance("com.intellij.idea.plugin.hybris.flexibleSearch.utils.FlexibleSearchParserUtils");
 
@@ -1081,11 +1083,11 @@ public class FlexibleSearchParserUtils {
         }
 
         public FlexibleSearchParserUtils.Frame init(PsiBuilder builder,
-                                                  FlexibleSearchParserUtils.ErrorState state,
-                                                  int level_,
-                                                  int modifiers_,
-                                                  IElementType elementType_,
-                                                  String name_) {
+                                                    FlexibleSearchParserUtils.ErrorState state,
+                                                    int level_,
+                                                    int modifiers_,
+                                                    IElementType elementType_,
+                                                    String name_) {
             parentFrame = state.currentFrame;
             elementType = elementType_;
 

@@ -31,26 +31,27 @@ import java.util.Set;
  *
  * @author Alexander Bartash <AlexanderBartash@gmail.com>
  */
+@SuppressWarnings("unused")
 public class CollectionUtils {
 
     @NotNull
     public static <T> Iterable<T> emptyIfNull(@Nullable final Iterable<T> iterable) {
-        return null == iterable ? Collections.<T>emptyList() : iterable;
+        return null == iterable ? Collections.emptyList() : iterable;
     }
 
     @NotNull
     public static <T> Collection<T> emptyCollectionIfNull(@Nullable final Collection<T> collection) {
-        return null == collection ? Collections.<T>emptyList() : collection;
+        return null == collection ? Collections.emptyList() : collection;
     }
 
     @NotNull
     public static <T> Set<T> emptySetIfNull(@Nullable final Set<T> collection) {
-        return null == collection ? Collections.<T>emptySet() : collection;
+        return null == collection ? Collections.emptySet() : collection;
     }
 
     @NotNull
     public static <T> List<T> emptyListIfNull(@Nullable final List<T> list) {
-        return null == list ? Collections.<T>emptyList() : list;
+        return null == list ? Collections.emptyList() : list;
     }
 
 }

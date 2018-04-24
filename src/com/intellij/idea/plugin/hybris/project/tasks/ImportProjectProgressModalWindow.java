@@ -18,6 +18,8 @@
 
 package com.intellij.idea.plugin.hybris.project.tasks;
 
+import com.intellij.facet.Facet;
+import com.intellij.facet.FacetConfiguration;
 import com.intellij.facet.FacetType;
 import com.intellij.facet.FacetTypeId;
 import com.intellij.facet.FacetTypeRegistry;
@@ -376,7 +378,7 @@ public class ImportProjectProgressModalWindow extends Task.Modal {
         final ConfigHybrisModuleDescriptor configModule = hybrisProjectDescriptor.getConfigHybrisModuleDescriptor();
         if (configModule != null) {
             configDir = configModule.getRootDirectory();
-            if (configDir != null && configDir.isDirectory()) {
+            if (configDir.isDirectory()) {
                 hybrisProjectSettings.setConfigDirectory(FileUtil.toSystemIndependentName(configDir.getPath()));
             }
         }
@@ -417,15 +419,15 @@ public class ImportProjectProgressModalWindow extends Task.Modal {
     private Set<String> createModulesOnBlackList() {
         final List<String> toBeImportedNames = hybrisProjectDescriptor
             .getModulesChosenForImport().stream()
-            .map(e -> e.getName())
+            .map(HybrisModuleDescriptor::getName)
             .collect(Collectors.toList());
-        final Set<String> modulesOnBlackList = hybrisProjectDescriptor
+
+        return hybrisProjectDescriptor
             .getFoundModules().stream()
             .filter(e -> !hybrisProjectDescriptor.getModulesChosenForImport().contains(e))
             .filter(e -> toBeImportedNames.contains(e.getName()))
-            .map(e -> e.getRelativePath())
+            .map(HybrisModuleDescriptor::getRelativePath)
             .collect(Collectors.toSet());
-        return modulesOnBlackList;
     }
 
     private void disableWrapOnType(final Language impexLanguage) {
@@ -433,13 +435,13 @@ public class ImportProjectProgressModalWindow extends Task.Modal {
         final CodeStyleSettings codeStyleSettings = currentScheme.getCodeStyleSettings();
         if (impexLanguage != null) {
             CommonCodeStyleSettings langSettings = codeStyleSettings.getCommonSettings(impexLanguage);
-            if (langSettings != null) {
-                langSettings.WRAP_ON_TYPING = CommonCodeStyleSettings.WrapOnTyping.NO_WRAP.intValue;
-            }
+            langSettings.WRAP_ON_TYPING = CommonCodeStyleSettings.WrapOnTyping.NO_WRAP.intValue;
         }
     }
 
-    private void excludeFrameworkDetection(final Project project, FacetTypeId facetTypeId) {
+    private <E extends FacetConfiguration, T extends Facet<E>> void excludeFrameworkDetection(
+        final Project project, FacetTypeId<T> facetTypeId
+    ) {
         final DetectionExcludesConfiguration configuration = DetectionExcludesConfiguration.getInstance(project);
         final FacetType facetType = FacetTypeRegistry.getInstance().findFacetType(facetTypeId);
         final FrameworkType frameworkType = FrameworkDetectionUtil.findFrameworkTypeForFacetDetector(facetType);

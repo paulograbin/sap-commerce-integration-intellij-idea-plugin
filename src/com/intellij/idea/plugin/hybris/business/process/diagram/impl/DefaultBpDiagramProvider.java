@@ -31,7 +31,6 @@ import com.intellij.idea.plugin.hybris.business.process.diagram.BpDiagramVfsReso
 import com.intellij.idea.plugin.hybris.common.utils.HybrisI18NBundleUtils;
 import com.intellij.idea.plugin.hybris.statistics.StatsCollector;
 import com.intellij.openapi.components.ServiceManager;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.intellij.lang.annotations.Pattern;
@@ -44,8 +43,6 @@ import org.jetbrains.annotations.Nullable;
  * @author Alexander Bartash <AlexanderBartash@gmail.com>
  */
 public class DefaultBpDiagramProvider extends BpDiagramProvider {
-
-    private static final Logger LOG = Logger.getInstance(DefaultBpDiagramProvider.class);
 
     public static final String ID = "HybrisBusinessProcessDiagramProvider";
 

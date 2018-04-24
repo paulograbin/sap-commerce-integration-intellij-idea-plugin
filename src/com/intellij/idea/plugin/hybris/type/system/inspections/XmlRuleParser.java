@@ -56,7 +56,7 @@ public class XmlRuleParser {
 
     private static class RulesHandler extends DefaultHandler {
 
-        private List<XmlRuleImpl> myRules = new ArrayList<>();
+        private final List<XmlRuleImpl> myRules = new ArrayList<>();
 
         public List<XmlRuleImpl> getRules() {
             return this.myRules;
@@ -190,6 +190,7 @@ public class XmlRuleParser {
             this.failOnTestQuery = Boolean.parseBoolean(failOnTestQuery);
         }
 
+        @SuppressWarnings("UnusedReturnValue")
         public boolean validate(final Logger logger) {
             boolean isValid = this.validateNotNull("Missing name XPath", this.getNameXPath(), logger);
             isValid &= this.validateNotNull("Missing selection XPath", this.getSelectionXPath(), logger);

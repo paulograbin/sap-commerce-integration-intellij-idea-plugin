@@ -47,7 +47,6 @@ public class ImpexFormattingModelBuilder implements FormattingModelBuilder {
 
         final Block impexBlock = new ImpexBlock(
             element.getNode(),
-            null,
             Alignment.createAlignment(),
             createSpaceBuilder(settings)
         );

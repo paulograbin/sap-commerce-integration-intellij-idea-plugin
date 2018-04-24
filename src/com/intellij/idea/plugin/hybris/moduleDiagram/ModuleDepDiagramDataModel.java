@@ -55,9 +55,9 @@ import java.util.stream.Collectors;
 public class ModuleDepDiagramDataModel extends DiagramDataModel<ModuleDepDiagramItem> {
 
     @NotNull
-    private Set<ModuleDepDiagramNode> myNodes = ContainerUtil.newHashSet();
+    private final Set<ModuleDepDiagramNode> myNodes = ContainerUtil.newHashSet();
     @NotNull
-    private Set<ModuleDepDiagramEdge> myEdges = ContainerUtil.newHashSet();
+    private final Set<ModuleDepDiagramEdge> myEdges = ContainerUtil.newHashSet();
 
     public ModuleDepDiagramDataModel(final Project project, final DiagramProvider<ModuleDepDiagramItem> provider) {
         super(project, provider);

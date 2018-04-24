@@ -32,7 +32,7 @@ import static com.intellij.util.containers.ContainerUtil.newArrayList;
 
 public abstract class ExecuteConsole {
 
-    private List<ConsoleView> consoleViewList;
+    private final List<ConsoleView> consoleViewList;
     private boolean processComplete = false;
 
     public ExecuteConsole() {
@@ -99,9 +99,9 @@ public abstract class ExecuteConsole {
                     clearAllConsoles();
                     fillAllConsolesWithTheSameContent("Send request");
                 } else {
-                    String dots = "";
+                    StringBuilder dots = new StringBuilder();
                     for (int j = 0; j < i; j++) {
-                        dots += ".";
+                        dots.append(".");
                     }
                     clearAllConsoles();
                     fillAllConsolesWithTheSameContent("Send request" + dots);

@@ -164,7 +164,7 @@ public class HybrisAntBuildListener implements AntExecutionListener {
         new WriteCommandAction.Simple(project, xmlFile) {
 
             @Override
-            protected void run() throws Throwable {
+            protected void run() {
 
                 final XmlTag hybrisconfig = xmlFile.getRootTag();
                 if (hybrisconfig == null) {

@@ -27,7 +27,7 @@ public class CookieParser {
 
     private final static Pattern PATTERN = Pattern.compile("JSESSIONID=[a-zA-Z0-9_-]*");
 
-    private static CookieParser cookieParser = new CookieParser();
+    private static final CookieParser cookieParser = new CookieParser();
 
     public static CookieParser getInstance() {
         return cookieParser;

@@ -552,10 +552,7 @@ public class DefaultHybrisProjectDescriptor implements HybrisProjectDescriptor {
             if (isDirectoryExcluded(file)) {
                 return false;
             }
-            if (Files.isSymbolicLink(file) && !followSymlink) {
-                return false;
-            }
-            return true;
+            return !Files.isSymbolicLink(file) || followSymlink;
         });
         if (files != null) {
             for (Path file : files) {
@@ -582,12 +579,11 @@ public class DefaultHybrisProjectDescriptor implements HybrisProjectDescriptor {
             file.toString().endsWith(HybrisConstants.EXCLUDE_TOMCAT_6_DIRECTORY) ||
             file.toString().endsWith(HybrisConstants.EXCLUDE_TCSERVER_DIRECTORY) ||
             file.toString().endsWith(HybrisConstants.EXCLUDE_TMP_DIRECTORY)) {
+
             return true;
         }
-        if (file.toString().contains(HybrisConstants.EXCLUDE_ANT_DIRECTORY)) {
-            return true;
-        }
-        return false;
+
+        return file.toString().contains(HybrisConstants.EXCLUDE_ANT_DIRECTORY);
     }
 
     protected void buildDependencies(@NotNull final Iterable<HybrisModuleDescriptor> moduleDescriptors) {
@@ -601,7 +597,7 @@ public class DefaultHybrisProjectDescriptor implements HybrisProjectDescriptor {
                 continue;
             }
 
-            final Set<HybrisModuleDescriptor> dependencies = new HashSet<HybrisModuleDescriptor>(
+            final Set<HybrisModuleDescriptor> dependencies = new HashSet<>(
                 requiredExtensionNames.size()
             );
 
@@ -689,7 +685,7 @@ public class DefaultHybrisProjectDescriptor implements HybrisProjectDescriptor {
 
         this.modulesChosenForImport.clear();
         this.modulesChosenForImport.addAll(moduleDescriptors);
-        moduleDescriptors.stream().forEach(module -> {
+        moduleDescriptors.forEach(module -> {
             if (module instanceof ConfigHybrisModuleDescriptor) {
                 configHybrisModuleDescriptor = (ConfigHybrisModuleDescriptor) module;
             }
@@ -699,7 +695,7 @@ public class DefaultHybrisProjectDescriptor implements HybrisProjectDescriptor {
         });
     }
 
-    @Nullable
+    @NotNull
     @Override
     public ConfigHybrisModuleDescriptor getConfigHybrisModuleDescriptor() {
         return configHybrisModuleDescriptor;
@@ -772,10 +768,11 @@ public class DefaultHybrisProjectDescriptor implements HybrisProjectDescriptor {
     }
 
     @Override
-    public void setHybrisVersion(final String hybrisVersion) {
+    public void setHybrisVersion(@Nullable final String hybrisVersion) {
         this.hybrisVersion = hybrisVersion;
     }
 
+    @Nullable
     @Override
     public String getHybrisVersion() {
         return hybrisVersion;
@@ -916,7 +913,7 @@ public class DefaultHybrisProjectDescriptor implements HybrisProjectDescriptor {
             HybrisModuleDescriptorFactory.class
         );
 
-        final Set<HybrisModuleDescriptor> existingModules = new THashSet<HybrisModuleDescriptor>();
+        final Set<HybrisModuleDescriptor> existingModules = new THashSet<>();
 
         for (Module module : ModuleManager.getInstance(project).getModules()) {
             try {

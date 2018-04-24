@@ -14,7 +14,7 @@ public enum Scope implements com.intellij.util.xml.NamedEnum {
 
     private final String value;
 
-    private Scope(String value) {
+    Scope(String value) {
         this.value = value;
     }
 

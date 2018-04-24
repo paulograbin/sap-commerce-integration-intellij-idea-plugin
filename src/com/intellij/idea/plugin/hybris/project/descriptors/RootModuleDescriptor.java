@@ -61,6 +61,7 @@ public class RootModuleDescriptor extends AbstractHybrisModuleDescriptor {
         return false;
     }
 
+    @NotNull
     @Override
     public HybrisModuleDescriptorType getDescriptorType() {
         return HybrisModuleDescriptorType.NONE;

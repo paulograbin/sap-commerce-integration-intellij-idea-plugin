@@ -41,6 +41,7 @@ public class CustomHybrisModuleDescriptor extends RegularHybrisModuleDescriptor 
         return Collections.emptySet();
     }
 
+    @NotNull
     @Override
     public HybrisModuleDescriptorType getDescriptorType() {
         return HybrisModuleDescriptorType.CUSTOM;

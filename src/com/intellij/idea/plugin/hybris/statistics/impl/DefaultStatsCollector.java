@@ -303,7 +303,7 @@ public class DefaultStatsCollector implements StatsCollector, PersistentStateCom
     }
 
     @Override
-    public void loadState(final Element state) {
+    public void loadState(@NotNull final Element state) {
         synchronized (lock) {
             queue.clear();
 

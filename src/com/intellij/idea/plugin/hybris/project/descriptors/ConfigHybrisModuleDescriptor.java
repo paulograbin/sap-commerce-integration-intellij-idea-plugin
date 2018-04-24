@@ -62,7 +62,7 @@ public class ConfigHybrisModuleDescriptor extends AbstractHybrisModuleDescriptor
     @NotNull
     @Override
     public List<JavaLibraryDescriptor> getLibraryDescriptors() {
-        return Collections.<JavaLibraryDescriptor>singletonList(new DefaultJavaLibraryDescriptor(
+        return Collections.singletonList(new DefaultJavaLibraryDescriptor(
             new File(this.getRootDirectory(), HybrisConstants.CONFIG_LICENCE_DIRECTORY), true
         ));
     }
@@ -76,6 +76,7 @@ public class ConfigHybrisModuleDescriptor extends AbstractHybrisModuleDescriptor
         this.preselected = preselected;
     }
 
+    @NotNull
     @Override
     public HybrisModuleDescriptorType getDescriptorType() {
         return isMainConfig() ? CONFIG : CUSTOM;

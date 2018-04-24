@@ -35,16 +35,10 @@ public class DirectoriesScannerErrorsProcessor implements TaskProgressProcessor<
     @Override
     public boolean shouldContinue(final List<File> t) {
         if (!t.isEmpty()) {
-            ApplicationManager.getApplication().invokeLater(new Runnable() {
-
-                @Override
-                public void run() {
-                    Messages.showErrorDialog(
-                        HybrisI18NBundleUtils.message("hybris.project.import.scan.failed", t),
-                        HybrisI18NBundleUtils.message("hybris.project.error")
-                    );
-                }
-            });
+            ApplicationManager.getApplication().invokeLater(() -> Messages.showErrorDialog(
+                HybrisI18NBundleUtils.message("hybris.project.import.scan.failed", t),
+                HybrisI18NBundleUtils.message("hybris.project.error")
+            ));
         }
 
         return false;

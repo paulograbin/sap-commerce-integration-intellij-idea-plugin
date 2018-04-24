@@ -1,6 +1,5 @@
 package com.intellij.idea.plugin.hybris.gradle;
 
-import com.intellij.idea.plugin.hybris.project.configurators.GradleConfigurator;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;

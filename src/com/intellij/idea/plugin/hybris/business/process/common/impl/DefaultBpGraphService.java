@@ -35,7 +35,6 @@ import com.intellij.idea.plugin.hybris.business.process.jaxb.model.BpGenericActi
 import com.intellij.idea.plugin.hybris.business.process.jaxb.services.BpJaxbService;
 import com.intellij.idea.plugin.hybris.common.utils.HybrisI18NBundleUtils;
 import com.intellij.openapi.components.ServiceManager;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.apache.commons.collections4.CollectionUtils;
@@ -53,8 +52,6 @@ import java.util.Map;
  * @author Alexander Bartash <AlexanderBartash@gmail.com>
  */
 public class DefaultBpGraphService implements BpGraphService {
-
-    private static final Logger LOG = Logger.getInstance(DefaultBpGraphService.class);
 
     @Nullable
     @Override
@@ -98,7 +95,7 @@ public class DefaultBpGraphService implements BpGraphService {
     protected Map<String, String> getTransitionIdsForAction(final BpGenericAction genericAction) {
         Validate.notNull(genericAction);
 
-        final Map<String, String> transitionsIds = new HashMap<String, String>();
+        final Map<String, String> transitionsIds = new HashMap<>();
 
         if (genericAction instanceof Action) {
             final Action action = (Action) genericAction;
@@ -129,8 +126,7 @@ public class DefaultBpGraphService implements BpGraphService {
             if (null != wait.getTimeout()) {
 
                 transitionsIds.put(
-                    HybrisI18NBundleUtils.message("hybris.business.process.timeout") + '\n' + wait.getTimeout()
-                                                                                                  .getDelay(),
+                    HybrisI18NBundleUtils.message("hybris.business.process.timeout") + '\n' + wait.getTimeout().getDelay(),
                     wait.getTimeout().getThen()
                 );
             }
@@ -167,7 +163,7 @@ public class DefaultBpGraphService implements BpGraphService {
         Validate.notNull(virtualFile);
         Validate.notNull(process);
 
-        final Map<String, BpGraphNode> nodesMap = new HashMap<String, BpGraphNode>();
+        final Map<String, BpGraphNode> nodesMap = new HashMap<>();
 
         for (BpGenericAction action : process.getNodes()) {
             nodesMap.put(action.getId(), new DefaultBpGraphNode(action, nodesMap, virtualFile, process));

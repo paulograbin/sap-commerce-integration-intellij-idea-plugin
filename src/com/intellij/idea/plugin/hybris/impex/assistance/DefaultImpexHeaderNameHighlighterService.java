@@ -43,10 +43,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class DefaultImpexHeaderNameHighlighterService implements ImpexHeaderNameHighlighterService {
 
-    protected final Map<Editor, PsiElement> highlightedBlocks = new ConcurrentHashMap<Editor, PsiElement>();
+    protected final Map<Editor, PsiElement> highlightedBlocks = new ConcurrentHashMap<>();
 
     @Override
-    @Contract(pure = false)
+    @Contract()
     public void highlightCurrentHeader(@NotNull final Editor editor) {
         Validate.notNull(editor);
 
@@ -67,7 +67,7 @@ public class DefaultImpexHeaderNameHighlighterService implements ImpexHeaderName
         }
     }
 
-    @Contract(pure = false)
+    @Contract()
     protected void highlightHeaderOfValueUnderCaret(@NotNull final Editor editor) {
         Validate.notNull(editor);
 
@@ -80,7 +80,7 @@ public class DefaultImpexHeaderNameHighlighterService implements ImpexHeaderName
         }
     }
 
-    @Contract(pure = false)
+    @Contract()
     protected void highlightArea(
         @NotNull final Editor editor,
         @NotNull final PsiElement impexFullHeaderParameter
@@ -92,22 +92,18 @@ public class DefaultImpexHeaderNameHighlighterService implements ImpexHeaderName
             return;
         }
 
-        ApplicationManager.getApplication().invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-                final PsiElement currentHighlightedElement = highlightedBlocks.remove(editor);
-                if (null != currentHighlightedElement) {
-                    modifyHighlightedArea(editor, currentHighlightedElement, true);
-                }
-
-                highlightedBlocks.put(editor, impexFullHeaderParameter);
-                modifyHighlightedArea(editor, impexFullHeaderParameter, false);
+        ApplicationManager.getApplication().invokeLater(() -> {
+            final PsiElement currentHighlightedElement = highlightedBlocks.remove(editor);
+            if (null != currentHighlightedElement) {
+                modifyHighlightedArea(editor, currentHighlightedElement, true);
             }
+
+            highlightedBlocks.put(editor, impexFullHeaderParameter);
+            modifyHighlightedArea(editor, impexFullHeaderParameter, false);
         });
     }
 
-    @Contract(pure = false)
+    @Contract()
     protected void clearHighlightedArea(@NotNull final Editor editor) {
         Validate.notNull(editor);
 
@@ -115,13 +111,7 @@ public class DefaultImpexHeaderNameHighlighterService implements ImpexHeaderName
             final PsiElement impexFullHeaderParameter = highlightedBlocks.remove(editor);
 
             if (null != impexFullHeaderParameter) {
-                ApplicationManager.getApplication().invokeLater(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        modifyHighlightedArea(editor, impexFullHeaderParameter, true);
-                    }
-                });
+                ApplicationManager.getApplication().invokeLater(() -> modifyHighlightedArea(editor, impexFullHeaderParameter, true));
             }
         }
     }
@@ -136,7 +126,7 @@ public class DefaultImpexHeaderNameHighlighterService implements ImpexHeaderName
         return this.highlightedBlocks.get(editor) == impexFullHeaderParameter;
     }
 
-    @Contract(pure = false)
+    @Contract()
     protected void modifyHighlightedArea(
         @NotNull final Editor editor,
         @NotNull final PsiElement impexFullHeaderParameter,
@@ -155,7 +145,7 @@ public class DefaultImpexHeaderNameHighlighterService implements ImpexHeaderName
 
         // This list must be modifiable
         // https://bitbucket.org/AlexanderBartash/impex-editor-intellij-idea-plugin/issue/11/unsupportedoperationexception-null
-        final List<TextRange> ranges = new ArrayList<TextRange>();
+        final List<TextRange> ranges = new ArrayList<>();
         ranges.add(impexFullHeaderParameter.getTextRange());
 
         HighlightUsagesHandler.highlightRanges(
@@ -168,7 +158,7 @@ public class DefaultImpexHeaderNameHighlighterService implements ImpexHeaderName
     }
 
     @Override
-    @Contract(pure = false)
+    @Contract()
     public void releaseEditorData(@NotNull final Editor editor) {
         Validate.notNull(editor);
 

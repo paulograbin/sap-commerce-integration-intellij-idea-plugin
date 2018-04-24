@@ -28,9 +28,9 @@ import com.intellij.psi.search.PsiShortNamesCache
  */
 class HybrisEnumItemReference(element: PsiElement, soft: Boolean) : PsiReferenceBase<PsiElement>(element, soft), PsiPolyVariantReference {
 
-    private val QUOTE_LENGTH = 2
+    private val quoteLength = 2
 
-    override fun getRangeInElement(): TextRange = TextRange.from(1, element.textLength - QUOTE_LENGTH)
+    override fun getRangeInElement(): TextRange = TextRange.from(1, element.textLength - quoteLength)
 
     override fun multiResolve(incompleteCode: Boolean): Array<ResolveResult> {
         val project = myElement.project

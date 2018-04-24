@@ -44,7 +44,7 @@ public class DefaultBpJaxbService implements BpJaxbService {
     private static final Logger LOG = Logger.getInstance(DefaultBpJaxbService.class);
 
     @Nullable
-    protected LazyInitializer<JAXBContext> jaxbContext = new JAXBContextLazyInitializer();
+    protected final LazyInitializer<JAXBContext> jaxbContext = new JAXBContextLazyInitializer();
 
     @Nonnull
     @Override

@@ -19,7 +19,6 @@
 package com.intellij.idea.plugin.hybris.settings;
 
 import com.intellij.openapi.options.Configurable;
-import com.intellij.openapi.options.ConfigurationException;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
@@ -63,7 +62,7 @@ public class HybrisSettingsConfigurable implements Configurable {
     }
 
     @Override
-    public void apply() throws ConfigurationException {
+    public void apply() {
         final HybrisApplicationSettingsComponent applicationSettingsComponent = HybrisApplicationSettingsComponent.getInstance();
 
         this.settingsForm.getData(applicationSettingsComponent.getState());

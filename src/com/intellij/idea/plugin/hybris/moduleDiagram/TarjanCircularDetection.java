@@ -29,11 +29,11 @@ import java.util.stream.Collectors;
 public class TarjanCircularDetection {
 
     private int index;
-    private Collection<ModuleDepDiagramEdge> myEdges;
-    private Collection<ModuleDepDiagramItem> myNodes;
+    private final Collection<ModuleDepDiagramEdge> myEdges;
+    private final Collection<ModuleDepDiagramItem> myNodes;
     private Stack<ModuleDepDiagramItem> stack;
-    private Map<ModuleDepDiagramItem, Integer> indexMap;
-    private Map<ModuleDepDiagramItem, Integer> lowLinkMap;
+    private final Map<ModuleDepDiagramItem, Integer> indexMap;
+    private final Map<ModuleDepDiagramItem, Integer> lowLinkMap;
 
     public TarjanCircularDetection(
         final Collection<ModuleDepDiagramNode> diagramNodes,
@@ -41,7 +41,7 @@ public class TarjanCircularDetection {
     ) {
         this.index = 0;
         this.myEdges = myEdges;
-        this.myNodes = diagramNodes.stream().map(node -> node.getIdentifyingElement()).collect(Collectors.toList());
+        this.myNodes = diagramNodes.stream().map(ModuleDepDiagramNode::getIdentifyingElement).collect(Collectors.toList());
         this.indexMap = new HashMap<>();
         this.lowLinkMap = new HashMap<>();
     }

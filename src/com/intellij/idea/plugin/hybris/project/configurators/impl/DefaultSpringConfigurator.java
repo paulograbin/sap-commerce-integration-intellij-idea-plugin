@@ -245,7 +245,7 @@ public class DefaultSpringConfigurator implements SpringConfigurator {
     }
 
     private void processContextParam(final HybrisModuleDescriptor moduleDescriptor, final String contextConfigLocation) {
-        File webModuleDir = new File(moduleDescriptor.getRootDirectory(), HybrisConstants.WEB_ROOT_DIRECTORY_RELATIVE_PATH);;
+        File webModuleDir = new File(moduleDescriptor.getRootDirectory(), HybrisConstants.WEB_ROOT_DIRECTORY_RELATIVE_PATH);
         for (String xml: contextConfigLocation.split(" ,")) {
             if (!xml.endsWith(".xml")) {
                 continue;

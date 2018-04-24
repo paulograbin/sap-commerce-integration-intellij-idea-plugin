@@ -40,6 +40,7 @@ import static org.apache.commons.lang3.StringUtils.startsWith;
  *
  * @author Alexander Bartash <AlexanderBartash@gmail.com>
  */
+@SuppressWarnings("unused")
 public final class CommonPsiUtils {
 
     private CommonPsiUtils() throws IllegalAccessException {
@@ -81,7 +82,7 @@ public final class CommonPsiUtils {
 
         PsiElement nextSibling = element.getNextSibling();
 
-        while (null != nextSibling && ImpexPsiUtils.isWhiteSpace(nextSibling)) {
+        while (ImpexPsiUtils.isWhiteSpace(nextSibling)) {
             nextSibling = nextSibling.getNextSibling();
         }
 
@@ -103,7 +104,7 @@ public final class CommonPsiUtils {
         while (child != null) {
             if (elementType == child.getElementType()) {
                 if (result.isEmpty()) {
-                    result = new ArrayList<PsiElement>();
+                    result = new ArrayList<>();
                 }
                 result.add(child.getPsi());
             }

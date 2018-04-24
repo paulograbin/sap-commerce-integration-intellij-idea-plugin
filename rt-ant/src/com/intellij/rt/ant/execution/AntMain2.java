@@ -18,8 +18,6 @@
 
 package com.intellij.rt.ant.execution;
 
-import java.io.FileNotFoundException;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 
 /**
@@ -29,13 +27,12 @@ import java.lang.reflect.InvocationTargetException;
  */
 public class AntMain2 {
 
+    @SuppressWarnings("unchecked")
     public static void main(String[] args) throws
                                            ClassNotFoundException,
                                            NoSuchMethodException,
                                            IllegalAccessException,
-                                           InvocationTargetException,
-                                           FileNotFoundException,
-                                           UnsupportedEncodingException {
+                                           InvocationTargetException {
         com.intellij.rt.ant.execution.HybrisIdeaAntLogger.guardStreams();
 
         for (int index = 0; index < args.length; index++) {
@@ -48,7 +45,6 @@ public class AntMain2 {
         // preferred way for us to run ant will be using the traditional ant entry point, via the "Main" class
         try {
             final Class antMain = Class.forName("org.apache.tools.ant.Main");
-            //noinspection HardCodedStringLiteral
             antMain.getMethod("main", new Class[]{args.getClass()}).invoke(null, new Object[]{args});
             return;
         } catch (ClassNotFoundException e) {
@@ -59,7 +55,6 @@ public class AntMain2 {
         // This approach is less preferred in our case, but still...
         // From the ant documentation: "You should start the launcher with the most minimal classpath possible, generally just the ant-launcher.jar."
         final Class antLauncher = Class.forName("org.apache.tools.ant.launch.Launcher");
-        //noinspection HardCodedStringLiteral
         antLauncher.getMethod("main", new Class[]{args.getClass()}).invoke(null, new Object[]{args});
 
     }

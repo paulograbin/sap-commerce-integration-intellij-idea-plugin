@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 public class StatsResponse {
 
     @NotNull
-    private HttpResponse response;
+    private final HttpResponse response;
 
     public StatsResponse(@NotNull HttpResponse response) {
         this.response = response;

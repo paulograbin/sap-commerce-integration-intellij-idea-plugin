@@ -106,7 +106,7 @@ public class DefaultSearchScopeConfigurator implements SearchScopeConfigurator {
 
         namedScopeManager.setScopes(ArrayUtil.mergeArrays(
             filteredScopes,
-            newScopes.toArray(new NamedScope[newScopes.size()])
+            newScopes.toArray(new NamedScope[0])
         ));
     }
 

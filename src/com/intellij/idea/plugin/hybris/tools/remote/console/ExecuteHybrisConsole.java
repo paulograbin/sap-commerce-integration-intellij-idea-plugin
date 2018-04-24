@@ -47,7 +47,7 @@ public class ExecuteHybrisConsole extends ExecuteConsole {
     private ConsoleView searchResultConsole;
     private ConsoleView errorConsoleView;
 
-    private static ExecuteHybrisConsole ourInstance = new ExecuteHybrisConsole();
+    private static final ExecuteHybrisConsole ourInstance = new ExecuteHybrisConsole();
 
     public static ExecuteHybrisConsole getInstance() {
         return ourInstance;

@@ -28,6 +28,7 @@ import org.jetbrains.annotations.Nullable;
  *
  * @author Alexander Bartash <AlexanderBartash@gmail.com>
  */
+@SuppressWarnings("unused")
 public final class CommonAstUtils {
 
     private CommonAstUtils() throws IllegalAccessException {

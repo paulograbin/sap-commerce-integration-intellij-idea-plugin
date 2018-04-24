@@ -24,7 +24,6 @@ import org.apache.http.message.BasicHttpResponse;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.message.BasicStatusLine;
 import org.apache.http.ssl.SSLContexts;
-import org.apache.http.ssl.TrustStrategy;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jsoup.Connection.Method;
@@ -43,7 +42,6 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,8 +70,8 @@ public abstract class AbstractHybrisHacHttpClient {
         String loginURL = hostHacURL + "/j_spring_security_check";
         HttpResponse response = post(project, loginURL, params, false);
         sessionId = CookieParser.getInstance().getSpecialCookie(response.getAllHeaders());
-        boolean success = sessionId != null;
-        return success;
+
+        return sessionId != null;
     }
 
     @NotNull
@@ -127,15 +125,10 @@ public abstract class AbstractHybrisHacHttpClient {
         return CommonIdeaService.getInstance().getHostHacUrl(project);
     }
 
-    protected CloseableHttpClient createAllowAllClient(long timeout) {
-        SSLContext sslcontext = null;
+    protected CloseableHttpClient createAllowAllClient(@SuppressWarnings("SameParameterValue") long timeout) {
+        SSLContext sslcontext;
         try {
-            sslcontext = SSLContexts.custom().loadTrustMaterial(null, new TrustStrategy() {
-                @Override
-                public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-                    return true;
-                }
-            }).build();
+            sslcontext = SSLContexts.custom().loadTrustMaterial(null, (chain, authType) -> true).build();
         } catch (NoSuchAlgorithmException | KeyManagementException | KeyStoreException e) {
             LOG.warn(e.getMessage(), e);
             return null;

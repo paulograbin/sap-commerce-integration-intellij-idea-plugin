@@ -23,6 +23,7 @@ import com.intellij.idea.plugin.hybris.project.descriptors.HybrisModuleDescripto
 import com.intellij.idea.plugin.hybris.settings.HybrisProjectSettingsComponent;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Set;
@@ -32,8 +33,8 @@ public class DefaultLoadedConfigurator implements LoadedConfigurator {
 
     @Override
     public void configure(
-        final Project project,
-        final List<HybrisModuleDescriptor> allModules
+        @NotNull final Project project,
+        @NotNull final List<HybrisModuleDescriptor> allModules
     ) {
         final Set<String> unusedModuleNames = allModules
             .stream()
@@ -41,8 +42,6 @@ public class DefaultLoadedConfigurator implements LoadedConfigurator {
             .map(HybrisModuleDescriptor::getName)
             .collect(Collectors.toSet());
 
-        ApplicationManager.getApplication().invokeAndWait(() -> {
-            HybrisProjectSettingsComponent.getInstance(project).getState().setUnusedExtensions(unusedModuleNames);
-        });
+        ApplicationManager.getApplication().invokeAndWait(() -> HybrisProjectSettingsComponent.getInstance(project).getState().setUnusedExtensions(unusedModuleNames));
     }
 }

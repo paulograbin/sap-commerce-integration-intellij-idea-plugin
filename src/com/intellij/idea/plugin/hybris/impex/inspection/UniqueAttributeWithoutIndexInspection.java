@@ -154,11 +154,13 @@ public class UniqueAttributeWithoutIndexInspection extends LocalInspectionTool {
                         .orElse(null);
         }
 
+        @SuppressWarnings("SameParameterValue")
         private static boolean hasAttributeValue(@NotNull final ImpexAttribute attr, @NotNull String text) {
             ImpexAnyAttributeValue value = attr.getAnyAttributeValue();
             return value != null && text.equals(value.getText());
         }
 
+        @SuppressWarnings("SameParameterValue")
         private static boolean hasAttributeName(@NotNull final ImpexAttribute attr, @NotNull String name) {
             ImpexAnyAttributeName attrName = attr.getAnyAttributeName();
             return attrName.getStringList().isEmpty() &&

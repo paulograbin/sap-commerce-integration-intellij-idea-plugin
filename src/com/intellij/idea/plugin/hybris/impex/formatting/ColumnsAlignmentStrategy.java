@@ -39,7 +39,7 @@ import java.util.List;
  */
 public class ColumnsAlignmentStrategy implements AlignmentStrategy {
 
-    private final List<Alignment> alignments = new ArrayList<Alignment>();
+    private final List<Alignment> alignments = new ArrayList<>();
     private int columnNumber = 0;
 
     public ColumnsAlignmentStrategy() {

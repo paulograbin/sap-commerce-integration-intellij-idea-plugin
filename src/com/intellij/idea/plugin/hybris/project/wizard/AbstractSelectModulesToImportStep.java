@@ -69,7 +69,7 @@ public abstract class AbstractSelectModulesToImportStep extends SelectImportedPr
     }
 
     protected List<HybrisModuleDescriptor> getAdditionalFixedElements() {
-        return Collections.EMPTY_LIST;
+        return Collections.emptyList();
     }
 
     @NotNull
@@ -77,7 +77,7 @@ public abstract class AbstractSelectModulesToImportStep extends SelectImportedPr
         final Set<HybrisModuleDescriptor> duplicateModules = newHashSet();
         final Map<String, HybrisModuleDescriptor> uniqueModules = new HashMap<>();
 
-        getAdditionalFixedElements().stream().forEach(e -> uniqueModules.put(e.getName(), e));
+        getAdditionalFixedElements().forEach(e -> uniqueModules.put(e.getName(), e));
 
         for (HybrisModuleDescriptor moduleDescriptor : this.fileChooser.getMarkedElements()) {
 
@@ -134,7 +134,7 @@ public abstract class AbstractSelectModulesToImportStep extends SelectImportedPr
     protected abstract void setList(final List<HybrisModuleDescriptor> allElements);
 
 
-    protected boolean validateCommon() throws ConfigurationException {
+    protected void validateCommon() throws ConfigurationException {
         final Set<HybrisModuleDescriptor> moduleDuplicates = this.calculateSelectedModuleDuplicates();
         final Collection<String> moduleDuplicateNames = newHashSet(moduleDuplicates.size());
 
@@ -151,8 +151,6 @@ public abstract class AbstractSelectModulesToImportStep extends SelectImportedPr
                 HybrisI18NBundleUtils.message("hybris.project.error")
             );
         }
-
-        return true;
     }
 
     /*

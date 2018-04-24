@@ -22,6 +22,7 @@ import com.intellij.ide.structureView.StructureViewBuilder;
 import com.intellij.idea.plugin.hybris.impex.psi.ImpexFile;
 import com.intellij.lang.PsiStructureViewFactory;
 import com.intellij.psi.PsiFile;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -31,7 +32,7 @@ public class ImpexStructureViewBuilderProvider implements PsiStructureViewFactor
 
     @Nullable
     @Override
-    public StructureViewBuilder getStructureViewBuilder(final PsiFile psiFile) {
+    public StructureViewBuilder getStructureViewBuilder(@NotNull final PsiFile psiFile) {
         if (psiFile instanceof ImpexFile) {
             return new ImpexStructureViewBuilder((ImpexFile) psiFile);
         }

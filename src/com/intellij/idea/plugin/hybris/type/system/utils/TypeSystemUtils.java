@@ -28,6 +28,7 @@ import org.jetbrains.annotations.Nullable;
  *
  * @author Alexander Bartash <AlexanderBartash@gmail.com>
  */
+@SuppressWarnings("unused")
 public final class TypeSystemUtils {
 
     public static boolean isTypeSystemXmlFile(@Nullable final PsiFile psiFile) {

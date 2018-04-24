@@ -24,12 +24,10 @@ import com.intellij.idea.plugin.hybris.project.descriptors.HybrisModuleDescripto
 import com.intellij.idea.plugin.hybris.project.descriptors.HybrisProjectDescriptor;
 import com.intellij.idea.plugin.hybris.project.descriptors.OotbHybrisModuleDescriptor;
 import com.intellij.openapi.externalSystem.service.project.IdeModifiableModelsProvider;
-import com.intellij.openapi.module.ModifiableModuleModel;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.DependencyScope;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ModuleOrderEntry;
-import com.intellij.openapi.roots.ModuleRootModificationUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -87,9 +85,9 @@ public class DefaultModulesDependenciesConfigurator implements ModulesDependenci
             }
 
             Optional<Module> targetDependencyModule = findModuleByNameIgnoreCase(allModules, dependency.getName());
-            final ModuleOrderEntry moduleOrderEntry = targetDependencyModule.isPresent()
-                ? rootModel.addModuleOrderEntry(targetDependencyModule.get())
-                : rootModel.addInvalidModuleEntry(dependency.getName());
+            final ModuleOrderEntry moduleOrderEntry = targetDependencyModule
+                .map(rootModel::addModuleOrderEntry)
+                .orElseGet(() -> rootModel.addInvalidModuleEntry(dependency.getName()));
 
             moduleOrderEntry.setExported(true);
             moduleOrderEntry.setScope(DependencyScope.COMPILE);

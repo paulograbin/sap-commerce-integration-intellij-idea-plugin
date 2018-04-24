@@ -89,12 +89,14 @@ public class HybrisAnsiAntLogger extends com.intellij.rt.ant.execution.HybrisPar
         return priority;
     }
 
-    private String removeLeadingChars(String message, String whiteSpace) {
+    @SuppressWarnings("SameParameterValue")
+    private String removeLeadingChars(String message, String stringToRemove) {
         if (message == null) {
-            return message;
+            return null;
         }
+
         for (int index = 0; index < message.length(); index++) {
-            if (whiteSpace.indexOf(message.charAt(index)) == -1) {
+            if (stringToRemove.indexOf(message.charAt(index)) == -1) {
                 return message.substring(index);
             }
         }
@@ -137,7 +139,7 @@ public class HybrisAnsiAntLogger extends com.intellij.rt.ant.execution.HybrisPar
                 case DEBUG_COLOR:
                     return MSG_DEBUG;
             }
-        } catch (NumberFormatException nfe) {
+        } catch (NumberFormatException ignored) {
         }
         return MSG_INFO;
     }

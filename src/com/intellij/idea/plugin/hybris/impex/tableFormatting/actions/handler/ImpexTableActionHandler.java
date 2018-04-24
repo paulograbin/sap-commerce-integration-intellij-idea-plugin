@@ -24,6 +24,7 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.actionSystem.EditorActionHandler;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static com.intellij.idea.plugin.hybris.statistics.StatsCollector.ACTIONS.IMPEX_TABLE_FORMAT;
@@ -34,7 +35,7 @@ import static com.intellij.idea.plugin.hybris.statistics.StatsCollector.ACTIONS.
 public abstract class ImpexTableActionHandler extends EditorActionHandler {
 
     @Override
-    protected void doExecute(Editor editor, @Nullable Caret caret, final DataContext dataContext) {
+    protected void doExecute(@NotNull Editor editor, @Nullable Caret caret, final DataContext dataContext) {
         StatsCollector.getInstance().collectStat(IMPEX_TABLE_FORMAT);
         ApplicationManager.getApplication().runWriteAction(action(editor));
     }

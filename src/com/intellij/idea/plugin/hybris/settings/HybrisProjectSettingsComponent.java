@@ -59,7 +59,7 @@ public class HybrisProjectSettingsComponent implements PersistentStateComponent<
     }
 
     @Override
-    public void loadState(final HybrisProjectSettings state) {
+    public void loadState(@NotNull final HybrisProjectSettings state) {
         XmlSerializerUtil.copyBean(state, this.hybrisProjectSettings);
     }
 }

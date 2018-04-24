@@ -182,9 +182,9 @@ class ValidateContextImpl implements ValidateContext {
         public static final NodeKey<Point> START_LOC = new NodeKey<>(MappedDocumentBuilder.class, "Start");
         public static final NodeKey<Point> END_LOC = new NodeKey<>(MappedDocumentBuilder.class, "End");
 
-        private Document myDoc;
+        private final Document myDoc;
         private Locator myLocator;
-        private LinkedList<Node> myElements = new LinkedList<>();
+        private final LinkedList<Node> myElements = new LinkedList<>();
 
         public MappedDocumentBuilder(final Document doc) {
             this.myDoc = doc;

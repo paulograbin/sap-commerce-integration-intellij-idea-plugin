@@ -40,7 +40,6 @@ import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -153,9 +152,9 @@ public class DefaultCommonIdeaService implements CommonIdeaService {
     public boolean shouldShowPermissionToSendStatisticsDialog() {
         final HybrisApplicationSettings settings = HybrisApplicationSettingsComponent.getInstance().getState();
         if (StatsCollector.getInstance().isOpenCollectiveContributor()) {
-            return !settings.isAllowedSendingPlainStatistics() && !settings.isDisallowedSendingStatistics();
+            return settings.isNotAllowedSendingPlainStatistics() && !settings.isDisallowedSendingStatistics();
         }
-        return !settings.isAllowedSendingPlainStatistics() && !settings.isDevelopmentMode();
+        return settings.isNotAllowedSendingPlainStatistics() && !settings.isDevelopmentMode();
     }
 
     @Override
@@ -208,8 +207,6 @@ public class DefaultCommonIdeaService implements CommonIdeaService {
         try (FileReader fr = new FileReader(propFile)) {
             prop.load(fr);
             return prop;
-        } catch (FileNotFoundException e) {
-            LOG.info(e.getMessage(), e);
         } catch (IOException e) {
             LOG.info(e.getMessage(), e);
         }

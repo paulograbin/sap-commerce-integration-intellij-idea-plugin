@@ -98,7 +98,7 @@ public class DefaultAntConfigurator implements AntConfigurator {
         "startHybrisServer",
         "startAdminServer"
     ));
-    public final List<String> desirableCustomTargets = new ArrayList<>(asList("build"));
+    public final List<String> desirableCustomTargets = new ArrayList<>(Collections.singletonList("build"));
     public final String[][] metaTargets = new String[][]{
         {"clean", "all"},
         {"clean", "customize", "all", "initialize"},

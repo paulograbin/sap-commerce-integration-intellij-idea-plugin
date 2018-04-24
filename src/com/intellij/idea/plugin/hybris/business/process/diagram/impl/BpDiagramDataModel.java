@@ -44,8 +44,8 @@ import java.util.Map;
  */
 public final class BpDiagramDataModel extends DiagramDataModel<BpGraphNode> {
 
-    private final Collection<BpDiagramFileEdge> edges = new ArrayList<BpDiagramFileEdge>();
-    private final Map<String, BpDiagramFileNode> nodesMap = new HashMap<String, BpDiagramFileNode>();
+    private final Collection<BpDiagramFileEdge> edges = new ArrayList<>();
+    private final Map<String, BpDiagramFileNode> nodesMap = new HashMap<>();
 
     public BpDiagramDataModel(final Project project, final BpGraphNode rootBpGraphNode) {
         super(project, ServiceManager.getService(BpDiagramProvider.class));

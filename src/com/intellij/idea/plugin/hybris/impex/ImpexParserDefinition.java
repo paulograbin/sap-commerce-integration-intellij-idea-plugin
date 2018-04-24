@@ -35,8 +35,6 @@ import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.Reader;
-
 public class ImpexParserDefinition implements ParserDefinition {
 
     public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE);
@@ -47,12 +45,12 @@ public class ImpexParserDefinition implements ParserDefinition {
         ImpexTypes.STRING
     );
 
-    public static final IFileElementType FILE = new IFileElementType(Language.<ImpexLanguage>findInstance(ImpexLanguage.class));
+    public static final IFileElementType FILE = new IFileElementType(Language.findInstance(ImpexLanguage.class));
 
     @NotNull
     @Override
     public Lexer createLexer(final Project project) {
-        return new FlexAdapter(new ImpexLexer((Reader) null));
+        return new FlexAdapter(new ImpexLexer(null));
     }
 
     @NotNull

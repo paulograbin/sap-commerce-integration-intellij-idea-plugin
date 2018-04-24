@@ -28,8 +28,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
-
 import static com.intellij.idea.plugin.hybris.impex.utils.ImpexPsiUtils.isMacroNameDeclaration;
 import static com.intellij.idea.plugin.hybris.impex.utils.ImpexPsiUtils.isMacroUsage;
 
@@ -49,11 +47,6 @@ public class ImpexFile extends PsiFileBase {
     @Override
     public String toString() {
         return "Impex File";
-    }
-
-    @Override
-    public Icon getIcon(final int flags) {
-        return super.getIcon(flags);
     }
 
     @Override

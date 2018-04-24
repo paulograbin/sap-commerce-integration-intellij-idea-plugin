@@ -35,7 +35,7 @@ public enum ModeModifierValue implements ImpexModifierValue {
 
     private final String modifierValue;
 
-    private static final Map<String, ModeModifierValue> ELEMENTS_MAP = new HashMap<String, ModeModifierValue>(
+    private static final Map<String, ModeModifierValue> ELEMENTS_MAP = new HashMap<>(
         ModeModifierValue.values().length
     );
 

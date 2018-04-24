@@ -50,12 +50,6 @@ class TSMetaPropertyImpl extends TSMetaEntityImpl<Attribute> implements TSMetaPr
         return myDeprecated;
     }
 
-    @Nullable
-    @Override
-    public String getName() {
-        return super.getName();
-    }
-
     @NotNull
     public TSMetaClassImpl getMetaClass() {
         return myMetaClass;

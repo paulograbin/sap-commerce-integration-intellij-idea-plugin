@@ -95,13 +95,6 @@ class TSMetaClassImpl extends TSMetaEntityImpl<ItemType> implements TSMetaClass 
         }
     }
 
-    @NotNull
-    @Override
-    public String getName() {
-        //noinspection NullableProblems
-        return super.getName();
-    }
-
     @Override
     @NotNull
     public Stream<? extends TSMetaProperty> getPropertiesStream(final boolean includeInherited) {

@@ -159,7 +159,8 @@ public class DefaultGroupModuleConfigurator implements GroupModuleConfigurator {
         if (!groupFile.exists()) {
             return null;
         }
-        String rawGroupText = null;
+        //noinspection UnusedAssignment
+        String rawGroupText;
         Properties properties = new Properties();
         try (InputStream in = new FileInputStream(groupFile)) {
             properties.load(in);

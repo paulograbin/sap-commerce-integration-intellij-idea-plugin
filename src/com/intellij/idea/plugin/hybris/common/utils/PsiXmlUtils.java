@@ -30,6 +30,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * @author Aleksandr Nosov <nosovae.dev@gmail.com>
  */
+@SuppressWarnings("unused")
 public class PsiXmlUtils {
 
     /**

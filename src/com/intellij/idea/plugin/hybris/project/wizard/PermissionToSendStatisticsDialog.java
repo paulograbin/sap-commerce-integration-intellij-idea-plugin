@@ -36,7 +36,7 @@ public class PermissionToSendStatisticsDialog extends DialogWrapper {
     private JPanel rootPanel;
     private JCheckBox permissionToSendStatisticsCheckBox;
     private JTextPane permissionToSendStatisticsTextPane;
-    private Project myProject;
+    private final Project myProject;
     private static final Logger LOG = Logger.getInstance(PermissionToSendStatisticsDialog.class);
 
     public PermissionToSendStatisticsDialog(@Nullable final Project project) {

@@ -30,13 +30,11 @@ import com.intellij.idea.plugin.hybris.flexibleSearch.psi.FlexibleSearchTableRef
 import com.intellij.idea.plugin.hybris.flexibleSearch.psi.FlexibleSearchWhereClause
 import com.intellij.psi.PsiElement
 import com.intellij.psi.util.PsiTreeUtil
-import com.intellij.util.ProcessingContext
 
 /**
  * @author Nosov Aleksandr <nosovae.dev@gmail.com>
  */
 object FSWhereClauseKeywordsAnalyzer {
-    private val errorIdendifier = "IntellijIdeaRulezzz"
 
     fun analyzeCompletions(parameters: CompletionParameters, completionResultSet: CompletionResultSet) {
         val context = parameters.originalPosition ?: parameters.position

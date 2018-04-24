@@ -44,7 +44,6 @@ public class HybrisIdeaAntLogger extends DefaultLogger {
     static SegmentedOutputStream ourErr;
     public static final char MESSAGE_CONTENT = 'M';
     public static final char EXCEPTION_CONTENT = 'X';
-    public static final char INPUT_REQUEST = 'I';
     public static final char BUILD_END = 'b';
     public static final char BUILD = 'B';
     public static final char TARGET = 'G';
@@ -54,12 +53,6 @@ public class HybrisIdeaAntLogger extends DefaultLogger {
     public static final char MESSAGE = 'M';
     public static final char ERROR = 'E';
     public static final char EXCEPTION = 'X';
-    public static final char EXCEPTION_LINE_SEPARATOR = 0;
-
-    /**
-     * @noinspection HardCodedStringLiteral
-     */
-    public static final String OUTPUT_PREFIX = "IDEA_ANT_INTEGRATION";
     private final Thread mainThread;
     private final Stack<String> callingTasks = new Stack<>();
 

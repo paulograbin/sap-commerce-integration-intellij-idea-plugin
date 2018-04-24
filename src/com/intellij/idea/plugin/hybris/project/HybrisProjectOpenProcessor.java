@@ -22,7 +22,6 @@ import com.intellij.ide.util.projectWizard.WizardContext;
 import com.intellij.idea.plugin.hybris.common.HybrisConstants;
 import com.intellij.idea.plugin.hybris.project.descriptors.HybrisModuleDescriptor;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.projectImport.ProjectOpenProcessorBase;
@@ -53,12 +52,7 @@ public class HybrisProjectOpenProcessor extends ProjectOpenProcessorBase<Default
             return false;
         }
 
-        try {
-            this.getBuilder().setList(projects);
-        } catch (ConfigurationException e) {
-            LOG.error(e);
-        }
-
+        this.getBuilder().setList(projects);
         wizardContext.setProjectName(projects.get(0).getName());
 
         return true;

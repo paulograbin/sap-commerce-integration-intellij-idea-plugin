@@ -39,7 +39,7 @@ public class DefaultBpGraphNode implements BpGraphNode {
 
     protected final BpGenericAction genericAction;
     protected final VirtualFile virtualFile;
-    protected final Map<String, BpGraphNode> transitions = new HashMap<String, BpGraphNode>();
+    protected final Map<String, BpGraphNode> transitions = new HashMap<>();
     protected final Map<String, BpGraphNode> nodeMap;
     protected final Process process;
 
@@ -114,6 +114,7 @@ public class DefaultBpGraphNode implements BpGraphNode {
             .toHashCode();
     }
 
+    @SuppressWarnings("StringBufferReplaceableByString")
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("DefaultBpGraphNode{");

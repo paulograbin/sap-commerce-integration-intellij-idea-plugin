@@ -25,6 +25,7 @@ import java.io.File;
 /**
  * @author Eugene.Kudelevsky
  */
+@SuppressWarnings("unused")
 public final class HybrisUtil {
 
     private HybrisUtil() {

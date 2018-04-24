@@ -43,6 +43,7 @@ public class FlexibleSearchPairedBraceMatcher implements PairedBraceMatcher {
         new BracePair(LEFT_PAREN, RIGHT_PAREN, false),
     };
 
+    @NotNull
     public BracePair[] getPairs() {
         return PAIRS;
     }

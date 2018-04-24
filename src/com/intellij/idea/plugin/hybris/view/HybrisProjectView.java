@@ -152,7 +152,6 @@ public class HybrisProjectView implements TreeStructureProvider, DumbAware {
                             if (superParent != null) {
                                 superParent.getPresentation().setIcon(HybrisIcons.HYBRIS_ICON);
                             }
-                            return;
                     }
                 });
     }
@@ -169,7 +168,7 @@ public class HybrisProjectView implements TreeStructureProvider, DumbAware {
     ) {
         Validate.notNull(children);
 
-        final Collection<AbstractTreeNode> treeNodes = new ArrayList<AbstractTreeNode>();
+        final Collection<AbstractTreeNode> treeNodes = new ArrayList<>();
 
         for (AbstractTreeNode child : children) {
             if (child instanceof PsiDirectoryNode) {
@@ -203,8 +202,8 @@ public class HybrisProjectView implements TreeStructureProvider, DumbAware {
             return children;
         }
 
-        final List<AbstractTreeNode> junkTreeNodes = new ArrayList<AbstractTreeNode>();
-        final Collection<AbstractTreeNode> treeNodes = new ArrayList<AbstractTreeNode>();
+        final List<AbstractTreeNode> junkTreeNodes = new ArrayList<>();
+        final Collection<AbstractTreeNode> treeNodes = new ArrayList<>();
 
         for (AbstractTreeNode child : children) {
             if (child instanceof BasePsiNode) {
@@ -253,10 +252,11 @@ public class HybrisProjectView implements TreeStructureProvider, DumbAware {
             }
         }
 
-        final Collection<AbstractTreeNode> compactedChildren = new ArrayList<AbstractTreeNode>();
+        final Collection<AbstractTreeNode> compactedChildren = new ArrayList<>();
 
         for (AbstractTreeNode child : children) {
 
+            //noinspection unchecked
             final AbstractTreeNode compactedChild = this.recursivelyCompactEmptyMiddlePackages(
                 child, child.getChildren()
             );
@@ -308,6 +308,7 @@ public class HybrisProjectView implements TreeStructureProvider, DumbAware {
                     parentPsiDirectoryNode, parentVirtualFile, onlyChildPsiDirectoryNode, onlyChildVirtualFile
                 );
 
+                //noinspection unchecked
                 return this.recursivelyCompactEmptyMiddlePackages(onlyChild, onlyChild.getChildren());
             }
         }

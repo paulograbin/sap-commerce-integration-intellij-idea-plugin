@@ -49,6 +49,7 @@ public class ExtHybrisModuleDescriptor extends RegularHybrisModuleDescriptor {
         return Collections.emptySet();
     }
 
+    @NotNull
     @Override
     public HybrisModuleDescriptorType getDescriptorType() {
         return HybrisModuleDescriptorType.EXT;

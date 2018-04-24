@@ -28,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Eugene.Kudelevsky
  */
+@SuppressWarnings("unused")
 public final class ActionUtils {
 
     private ActionUtils() {

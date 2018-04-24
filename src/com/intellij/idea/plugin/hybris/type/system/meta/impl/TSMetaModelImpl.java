@@ -125,6 +125,7 @@ class TSMetaModelImpl implements TSMetaModel {
     }
 
     @Nullable
+    @SuppressWarnings("UnusedReturnValue")
     TSMetaEnumImpl findOrCreateEnum(final @NotNull EnumType domEnumType) {
         final String name = TSMetaEnumImpl.extractName(domEnumType);
         if (StringUtil.isEmpty(name)) {
@@ -135,13 +136,15 @@ class TSMetaModelImpl implements TSMetaModel {
         if (impl == null) {
             impl = new TSMetaEnumImpl(name, domEnumType);
             enums.put(name, impl);
-        } else {
-            //report a problem
         }
+
+        //report a problem
+
         return impl;
     }
 
     @Nullable
+    @SuppressWarnings("UnusedReturnValue")
     TSMetaCollectionImpl findOrCreateCollection(@NotNull final CollectionType domCollectionType) {
         final String name = TSMetaCollectionImpl.extractName(domCollectionType);
         if (StringUtil.isEmpty(name)) {

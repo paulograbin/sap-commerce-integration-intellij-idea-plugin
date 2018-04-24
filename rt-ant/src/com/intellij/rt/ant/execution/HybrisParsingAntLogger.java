@@ -24,7 +24,6 @@ import org.apache.tools.ant.BuildEvent;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.Arrays;
 
 /**
  * Created by Martin Zdarsky-Jones on 17/2/17.
@@ -99,7 +98,7 @@ public class HybrisParsingAntLogger extends com.intellij.rt.ant.execution.Hybris
         final String fileName = firstExtensionPath.substring(0, index) + "/temp/ant.ser";
         try (
             FileOutputStream fileOut = new FileOutputStream(fileName);
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut)
         ) {
             out.writeObject(result);
         } catch (IOException e) {
