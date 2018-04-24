@@ -54,7 +54,8 @@
 
         <lang.parserDefinition language="FlexibleSearch" implementationClass="com.intellij.idea.plugin.hybris.flexibleSearch.FlexibleSearchParserDefinition"/>
 
-        <lang.syntaxHighlighterFactory key="FlexibleSearch" implementationClass="com.intellij.idea.plugin.hybris.flexibleSearch.highlighting.FlexibleSearchSyntaxHighlighterFactory"/>
+        <lang.syntaxHighlighterFactory language="FlexibleSearch"
+                                       implementationClass="com.intellij.idea.plugin.hybris.flexibleSearch.highlighting.FlexibleSearchSyntaxHighlighterFactory"/>
 
         <colorSettingsPage implementation="com.intellij.idea.plugin.hybris.flexibleSearch.highlighting.FlexibleSearchColorSettingsPage"/>
 
@@ -86,7 +87,7 @@
         <lang.parserDefinition language="Impex"
                                implementationClass="com.intellij.idea.plugin.hybris.impex.ImpexParserDefinition"/>
 
-        <lang.syntaxHighlighterFactory key="Impex"
+        <lang.syntaxHighlighterFactory language="Impex"
                                        implementationClass="com.intellij.idea.plugin.hybris.impex.highlighting.ImpexSyntaxHighlighterFactory"/>
 
         <colorSettingsPage implementation="com.intellij.idea.plugin.hybris.impex.highlighting.ImpexColorSettingsPage"/>

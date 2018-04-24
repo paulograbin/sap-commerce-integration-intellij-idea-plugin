@@ -19,6 +19,7 @@
 <idea-plugin>
 
     <extensions defaultExtensionNs="com.intellij">
+        <!--suppress PluginXmlValidity -->
         <lang.foldingBuilder language="JSP"
                              implementationClass="com.intellij.idea.plugin.hybris.jsp.JspPropertyFoldingBuilder"/>
 

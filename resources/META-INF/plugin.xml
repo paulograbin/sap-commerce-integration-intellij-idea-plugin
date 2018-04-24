@@ -18,9 +18,9 @@
   ~ along with this program. If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<idea-plugin xmlns:xi="http://www.w3.org/2001/XInclude">
+<idea-plugin>
 
-    <xi:include href="/META-INF/plugin-release-info.xml" xpointer="xpointer(/idea-plugin/*)"/>
+    <xi:include href="/META-INF/plugin-release-info.xml" xpointer="xpointer(/idea-plugin/*)" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
     <depends>com.intellij.modules.lang</depends>
 
@@ -37,8 +37,8 @@
     <depends optional="true" config-file="properties-optional-dependencies.xml">com.intellij.properties</depends>
     <depends optional="true" config-file="groovy-optional-dependencies.xml">org.intellij.groovy</depends>
 
-    <xi:include href="/META-INF/plugin-internal.xml" xpointer="xpointer(/idea-plugin/*)"/>
-    <xi:include href="/META-INF/plugin-community.xml" xpointer="xpointer(/idea-plugin/*)"/>
+    <xi:include href="/META-INF/plugin-internal.xml" xpointer="xpointer(/idea-plugin/*)" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="/META-INF/plugin-community.xml" xpointer="xpointer(/idea-plugin/*)" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
     <extensions defaultExtensionNs="com.intellij">
 
